@@ -9,14 +9,17 @@ import { initUi, initUiForVrOverlay } from './ui';
  */
 export async function initPlugins(isVrOverlay = false) {
     await initInteropApi(isVrOverlay);
+    initDayjs();
+    if (isVrOverlay) {
+        initNoty(true);
+    }
+}
+
+export async function initUiPlugins(isVrOverlay = false) {
     if (!isVrOverlay) {
         await initUi();
     } else {
         await initUiForVrOverlay();
-    }
-    initDayjs();
-    if (isVrOverlay) {
-        initNoty(true);
     }
 }
 

@@ -3152,5 +3152,20 @@
         "clocks_none": "无",
         "timezone": "时区",
         "now_playing": "正在游玩"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX 云同步",
+    "settings.integrations.cloud_settings.section_description": "将好友数据和动态同步到云服务器，实现 7×24 不间断记录。",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "启用云同步",
+    "settings.integrations.cloud_settings.server_url": "服务器地址",
+    "settings.integrations.cloud_settings.configure": "配置",
+    "settings.integrations.cloud_settings.push_settings": "推送通知",
+    "settings.integrations.cloud_settings.description": "连接到 VRCX 云服务器以同步好友动态并接收推送通知。",
+    "settings.integrations.cloud_settings.api_key": "API 密钥",
+    "settings.integrations.cloud_settings.api_key_placeholder": "输入云服务器 API 密钥",
+    "settings.integrations.cloud_settings.test": "测试连接",
+    "settings.integrations.cloud_settings.testing": "测试中...",
+    "settings.integrations.cloud_settings.save": "保存",
+    "settings.integrations.cloud_settings.saved": "设置已保存",
+    "settings.integrations.cloud_settings.connected": "已连接到云服务器",
+    "settings.integrations.cloud_settings.connection_failed": "连接失败"
 }

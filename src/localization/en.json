@@ -3161,5 +3161,20 @@
         "clocks_none": "None",
         "timezone": "Timezone",
         "now_playing": "Now Playing"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Cloud Sync",
+    "settings.integrations.cloud_settings.section_description": "Sync friend data and activity to a cloud server for 24/7 tracking.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Cloud Sync Enabled",
+    "settings.integrations.cloud_settings.server_url": "Server URL",
+    "settings.integrations.cloud_settings.configure": "Configure",
+    "settings.integrations.cloud_settings.push_settings": "Push Notifications",
+    "settings.integrations.cloud_settings.description": "Connect to a VRCX Cloud Server to sync friend activity and receive push notifications.",
+    "settings.integrations.cloud_settings.api_key": "API Key",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Enter your cloud server API key",
+    "settings.integrations.cloud_settings.test": "Test Connection",
+    "settings.integrations.cloud_settings.testing": "Testing...",
+    "settings.integrations.cloud_settings.save": "Save",
+    "settings.integrations.cloud_settings.saved": "Settings saved",
+    "settings.integrations.cloud_settings.connected": "Connected to cloud server",
+    "settings.integrations.cloud_settings.connection_failed": "Connection failed"
 }

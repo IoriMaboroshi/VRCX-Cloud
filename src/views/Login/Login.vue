@@ -2,6 +2,11 @@
     <div class="x-login-container">
         <div class="m-1.5" style="position: absolute; top: 0; left: 0">
             <LoginSettingsDialog />
+            <TooltipWrapper side="top" :content="'VRCX Cloud Sync'">
+                <Button class="rounded-full mr-2 text-xs" size="icon-sm" variant="ghost" @click="isCloudDialogOpen = true">
+                    <Cloud />
+                </Button>
+            </TooltipWrapper>
             <TooltipWrapper v-if="!noUpdater" side="top" :content="t('view.login.updater')">
                 <Button class="rounded-full mr-2 text-xs" size="icon-sm" variant="ghost" @click="showVRCXUpdateDialog">
                     <span class="relative inline-flex items-center justify-center">
@@ -177,6 +182,7 @@
             </div>
         </div>
     </div>
+    <CloudSettingsDialog v-model:isCloudSettingsDialogVisible="isCloudDialogOpen" />
 </template>
 
 <script setup>
@@ -191,7 +197,7 @@
     import { onBeforeMount, onBeforeUnmount, ref, watch } from 'vue';
     import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
     import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@/components/ui/item';
-    import { ArrowBigDownDash, Languages, Trash2, TriangleAlert, User } from 'lucide-vue-next';
+    import { ArrowBigDownDash, Cloud, Languages, Settings, Trash2, TriangleAlert, User } from 'lucide-vue-next';
     import { Field as VeeField, useForm } from 'vee-validate';
     import { useRoute, useRouter } from 'vue-router';
     import { Button } from '@/components/ui/button';
@@ -218,6 +224,7 @@
     import { watchState } from '../../services/watchState';
 
     import LoginSettingsDialog from './Dialog/LoginSettingsDialog.vue';
+    import CloudSettingsDialog from '../Settings/dialogs/CloudSettingsDialog.vue';
 
     const { userImage } = useUserDisplay();
     const { showVRCXUpdateDialog } = useVRCXUpdaterStore();
@@ -237,6 +244,7 @@
     const { t } = useI18n();
 
     const savedCredentials = ref({});
+    const isCloudDialogOpen = ref(false);
     const requiredMessage = 'Required';
 
     const formSchema = toTypedSchema(

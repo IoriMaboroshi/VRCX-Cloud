@@ -1,0 +1,59 @@
+name: Cloud Server CI
+
+on:
+  push:
+    paths:
+      - 'server/**'
+    branches: [master, main]
+  pull_request:
+    paths:
+      - 'server/**'
+    branches: [master, main]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run typecheck
+
+  docker:
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: server
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/vrcx-cloud:latest
+            ghcr.io/${{ github.repository }}/vrcx-cloud:${{ github.ref_name }}

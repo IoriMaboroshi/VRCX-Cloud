@@ -53,6 +53,7 @@ import { useNotificationsSettingsStore } from '../settings/notifications';
 import { useSharedFeedStore } from '../sharedFeed';
 import { useUiStore } from '../ui';
 import { useUserStore } from '../user';
+import { useCloudStore } from '../cloud';
 import { useWristOverlaySettingsStore } from '../settings/wristOverlay';
 import { watchState } from '../../services/watchState';
 
@@ -74,6 +75,7 @@ export const useNotificationStore = defineStore('Notification', () => {
     const sharedFeedStore = useSharedFeedStore();
     const instanceStore = useInstanceStore();
     const modalStore = useModalStore();
+    const cloudStore = useCloudStore();
 
     const notificationInitStatus = ref(false);
     const notificationTable = ref({
@@ -721,6 +723,28 @@ export const useNotificationStore = defineStore('Notification', () => {
      * @returns {Promise<void>}
      */
     async function refreshNotifications() {
+        // If cloud sync is enabled, pull from cloud server instead of VRChat API
+        if (cloudStore.shouldUseCloud()) {
+            isNotificationsLoading.value = true;
+            try {
+                const cloudNotifications = await cloudStore.fetchNotificationsAsVRChat();
+                if (cloudNotifications.length > 0) {
+                    for (const json of cloudNotifications) {
+                        handleNotification({
+                            json,
+                            params: { notificationId: json.id },
+                        });
+                    }
+                }
+                isNotificationsLoading.value = false;
+                return;
+            } catch (err) {
+                console.error('[Cloud] Notification refresh failed, falling back to VRChat API:', err);
+                isNotificationsLoading.value = false;
+                // Fall through to normal VRChat API path
+            }
+        }
+
         isNotificationsLoading.value = true;
         let count;
         let params;

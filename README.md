@@ -1,143 +1,139 @@
-<div align="center">
-
-# <img src="https://raw.githubusercontent.com/vrcx-team/VRCX/master/images/VRCX.ico" width="64" height="64"> </img> VRCX
-
-[![GitHub release](https://img.shields.io/github/release/vrcx-team/VRCX.svg)](https://github.com/vrcx-team/VRCX/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/vrcx-team/VRCX/total?color=6451f1)](https://github.com/vrcx-team/VRCX/releases/latest)
-[![GitHub Workflow Status](https://github.com/vrcx-team/VRCX/actions/workflows/github_actions.yml/badge.svg)](https://github.com/vrcx-team/VRCX/actions/workflows/github_actions.yml)
-[![VRCX Discord Invite](https://img.shields.io/discord/854071236363550763?color=%237289DA&logo=discord&logoColor=white&label=discord)](https://vrcx.app/discord)
-
-| **English** | [Français](./README/README.fr.md) | [日本語](./README/README.jp.md) | [简体中文](./README/README.zh_CN.md) | [Italiano](./README/README.it.md) | [Русский](./README/README.ru_RU.md) | [Español](./README/README.es.md) | [Polski](./README/README.pl.md) | [ภาษาไทย](./README/README.th.md) | [Magyar](./README/README.hu.md)
-
-VRCX is an assistant/companion application for VRChat that provides information about and helps you accomplish various things related to VRChat in a more convenient fashion than relying on the plain VRChat client (desktop or VR), or website alone. It also includes some other neat features outlined below.
-
-# Getting Started
+# VRCX-Cloud
 
 <div align="center">
 
-Download and install the latest installer (`VRCX_Setup.exe`) from [here](https://github.com/vrcx-team/VRCX/releases/latest).
+**VRChat 好友动态云端追踪 · 7×24 不间断记录 · 多端同步**
 
-For macOS and Linux check [here](https://github.com/vrcx-team/VRCX/wiki/Running-VRCX-on-Linux) for more info.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-2026.05.03-blue)](Version)
 
-Beta/nightly build available [here](https://vrcx.app/github/nightly) or in-app `Settings -> General -> Change build`.
+[English](#english) | [简体中文](#简体中文) | [日本語](#日本語)
 
-# Features
-
-<div align="left">
-
-- :family: Friend, world, and avatar list management
-  - Manage your friends list, world/group/avatar lists outside of VRChat.
-  - Monitor the activity of your friends and track their online status, locations, and avatars.
-  - Track friendship history including add dates, time spent together, and name changes.
-  - Save notes and memos to help remember how you met.
-- :bar_chart: Customizable Dashboard with widgets
-  - Build personalized multi-panel layouts with Feed, GameLog, and Instance widgets.
-  - Create multiple dashboards, each with configurable event filters and column visibility.
-- :mag: Powerful search across all entities
-  - Search for users, worlds, avatars, and groups, or paste IDs and URLs for direct access.
-  - Quick Search provides instant client-side fuzzy search across your friends, avatars, worlds, and groups.
-- :chart_with_upwards_trend: Activity Heatmap
-  - Visualize a user's online activity patterns with a day-of-week × hour-of-day heatmap, including peak stats.
-- :camera: Store world data in the pictures you take in-game, so you can remember that one world you took those cool pictures in like... 6 months ago!
-- :bell: Monitor/respond to notifications
-  - You can send/receive invites and friend requests from VRCX as well as see the instance info of invites that you receive.
-- :scroll: See stats/players for your current instance
-- :tv: See the links to videos that are playing in the world you're in, as well as various other logged data.
-- :performing_arts: Social Status Presets
-  - Save and quickly apply status + status description combinations from the sidebar or user dialog.
-- :rotating_light: VRChat Server Status
-  - A status bar indicator and login page alert inform you of VRChat server issues and outages in real time.
-- :bar_chart: Improved Discord Rich Presence
-  - Display detailed instance information in Discord, including world thumbnail, name, player count, and a join button for public lobbies.
-- :crystal_ball: VR Overlay with configurable live feed of all supported events/notifications
-- :outbox_tray: Upload and manage avatar/world images and details without Unity
-- :electric_plug: Automatically launch apps when you start VRChat
-- :skull: Automatically restart and join last instance when VRC crashes
-- :left_right_arrow: Export/import data
-  - Export friends list, avatar list, Discord names, notes, and favorite groups. Import favorite groups and group moderation bans.
-
-## Miscellaneous
-
-- Want a new look for VRCX? Check out [Themes](https://github.com/vrcx-team/VRCX/wiki/Themes)
-- See [Building from source](https://github.com/vrcx-team/VRCX/wiki/Building-from-source) for instructions on how to build VRCX from source.
-- For a guide on how to run VRCX on Linux, see [here](https://github.com/vrcx-team/VRCX/wiki/Running-VRCX-on-Linux)
-- Interested in contributing? See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for guidelines.
-
-# Screenshots
-
-<div align="center">
-
-<h3>Login</h3>
-
-<table>
-  <tr>
-    <td align="center"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251994190-5e6a961e-b2fe-4d3b-bf66-455d8626b8bf.png" alt="login"></td>
-    <td align="center"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251994414-a21faf59-6199-45de-94e7-a093a6b8c0ac.png" alt="2fa"></td>
-  </tr>
-</table>
-
-<h3>Feed</h3>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251987020-9839a2c9-47db-4271-b1bf-8e07669a7056.png" alt="feed">
-
-<h3>GameLog</h3>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251987498-b82266ed-131d-42ad-be2f-b167f24acf9f.png" alt="gamelog">
-
-<h3>UserInfo</h3>
-
-<h4>Me</h4>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251990237-0c863d27-141c-4447-82de-4279ab8973ea.png" alt="me">
-
-<h4>Friend</h4>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251989666-8f918786-e632-451d-be29-f92d2c681b80.png" alt="friend">
-
-<h3>World</h3>
-
-<table>
-  <tr>
-    <td align="center"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251991003-37a986bb-470c-442b-8ada-31918f7b2017.png" alt="instance"></td>
-    <td align="center"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251991217-0d40846f-ac08-48c0-8e4d-18c35fe0999b.png" alt="info"></td>
-  </tr>
-</table>
-
-<h3>Favorite</h3>
-
-<h4>Friend</h4>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251992424-ba406d0f-787e-4e2d-89bd-4caa0a05d31f.png" alt="friend">
-
-<h4>World</h4>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251992950-8f2c6cdc-dc9a-4a60-b59f-9fa80d071359.png" alt="world">
-
-<h4>Avatar</h4>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251993408-66d11100-15a8-484f-b9fd-82be1516c9be.png" alt="avatar">
-
-<h3>Friend Log</h3>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251993741-e2033095-4ceb-4552-8b79-9285325c1e49.png" alt="friendlog">
-
-<h3>Discord Rich Presence</h3>
-
-<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/82102170/251997318-5a71249c-59fc-4ad6-9194-d6b1d4165600.png" alt="discord">
-
-<!-- The other images will be similar to this -->
 </div>
-
-## Is VRCX against VRChat's TOS?
-
-**No.**
-
-VRCX is an external tool that uses the VRChat API to provide the features it does.
-
-It does not modify the game in any way, only using the API responsibly to provide the features it does. It is not a mod, or a cheat, or any other form of modification to the game.
-
-To see VRChat's stance on API usage, see the #faq channel in the VRChat Discord.
 
 ---
 
-VRCX is not endorsed by VRChat and does not reflect the views or opinions of VRChat or anyone officially involved in producing or managing VRChat properties. VRChat and all associated properties are trademarks or registered trademarks of VRChat Inc. VRChat © VRChat Inc.
+## English
+
+VRCX-Cloud is a fork of [VRCX](https://github.com/vrcx-team/VRCX), designed to deploy a 24/7 cloud server that continuously tracks your VRChat friends' activity — even when your local VRCX isn't running. It also extends VRCX with features absorbed from [VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai).
+
+### Key Features
+
+- **24/7 Cloud Tracking** — Deploy a lightweight Node.js server that polls VRChat API around the clock, recording friend online/offline events, location changes, and bio updates to SQLite.
+- **Real-Time Sync** — Desktop client pulls data from the cloud server via REST API. Your friends' location history and activity timeline are always available.
+- **Push Notifications** — Get alerted when VIP friends come online, go offline, or change location via Email, Telegram Bot, or QQ Bot (NapQQ).
+- **Bio Change History** — Automatically tracks bio changes with timestamps. Bio diff view coming soon.
+- **Status Distribution** — Visualize friend status color distribution (online/join-me/ask-me/busy/offline).
+- **Self-Data Tracking** — Records your own location and status changes over time.
+- **Persistent Timer** — Friend "time in instance" survives app restarts by restoring from cloud data.
+- **Multi-Account Ready** — Separate `app.vrcx-dev` data directory prevents conflicts with your main VRCX installation.
+- **Cross-Platform** — Cloud server runs on any Node.js 24+ environment. Desktop client runs wherever VRCX runs.
+
+### Architecture
+
+```
+┌─────────────────┐     HTTPS/REST      ┌──────────────────┐     HTTPS       ┌─────────────┐
+│  VRCX Desktop   │ ◄──────────────────► │  VRCX-Cloud      │ ◄─────────────► │  VRChat API │
+│  (Electron+Vue) │    Friends/Notifs   │  Server (Node.js) │   Polling/WS   │             │
+│                 │    Push Cookie      │  + SQLite         │                │             │
+└─────────────────┘                     └──────────────────┘                └─────────────┘
+                                               │
+                                        ┌──────┴──────┐
+                                        │  Push Alerts │
+                                        │ Email/TG/QQ │
+                                        └─────────────┘
+```
+
+### Quick Start
+
+**Cloud Server:**
+```bash
+cd server
+cp .env.example .env
+# Edit .env with your API_KEY and ENCRYPTION_KEY
+npm install
+npm run dev
+```
+
+**Desktop Client:**
+```bash
+npm install
+npm run dev          # Terminal 1: Vite dev server
+npm run start-electron -- --hot-reload  # Terminal 2: Electron
+```
+
+Then click the ☁️ icon on the login page to configure cloud sync.
+
+### Acknowledgements
+
+- **[VRCX](https://github.com/vrcx-team/VRCX)** — The original VRChat companion application. Thanks to [pypy](https://github.com/pypy-vrc) and all 110+ contributors.
+- **[VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai)** — Inspiration for Bio tracking, status distribution analytics, persistent timer, and enhanced quick search.
+
+---
+
+## 简体中文
+
+VRCX-Cloud 是 [VRCX](https://github.com/vrcx-team/VRCX) 的 fork 版本，新增云端服务器模块，实现 7×24 小时不间断追踪 VRChat 好友动态。即使本地 VRCX 未运行，也能持续记录好友上下线、位置变化、Bio 变更等数据。同时吸收了 [VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai) 的优秀功能。
+
+### 核心功能
+
+- **7×24 云端追踪** — 部署轻量 Node.js 服务器，全天候轮询 VRChat API，记录好友在线/离线、位置变化、Bio 变更至 SQLite。
+- **实时同步** — 桌面客户端通过 REST API 从云端拉取数据，好友位置历史、动态时间线随时随地可查。
+- **推送通知** — VIP 好友上线/下线/换房时，通过邮件、Telegram Bot、QQ Bot（NapQQ）推送提醒。
+- **Bio 变更记录** — 自动追踪好友 Bio 变化并记录时间戳，支持 Bio Diff 对比。
+- **状态分布** — 可视化好友状态灯色分布（在线/可加入/请询问/忙碌/离线）。
+- **自追踪** — 记录自己的位置和状态变化历史。
+- **持久化计时** — 好友"所在实例时长"不再因重启归零，从云端数据恢复。
+- **多账号隔离** — 使用独立的 `app.vrcx-dev` 数据目录，不与正式版 VRCX 冲突。
+- **跨平台** — 云端服务器支持所有 Node.js 24+ 环境。桌面端支持 VRCX 所有平台。
+
+### 快速开始
+
+**云服务器：**
+```bash
+cd server
+cp .env.example .env
+# 编辑 .env 设置 API_KEY 和 ENCRYPTION_KEY
+npm install
+npm run dev
+```
+
+**桌面客户端：**
+```bash
+npm install
+npm run dev          # 终端1：Vite 开发服务器
+npm run start-electron -- --hot-reload  # 终端2：Electron
+```
+
+登录页点击 ☁️ 图标配置云同步。
+
+### 致谢
+
+- **[VRCX](https://github.com/vrcx-team/VRCX)** — 原始 VRChat 伴侣应用。感谢 [pypy](https://github.com/pypy-vrc) 及 110+ 贡献者。
+- **[VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai)** — 提供了 Bio 追踪、状态分布分析、持久化计时器、增强搜索等功能的灵感。
+
+---
+
+## 日本語
+
+VRCX-Cloud は [VRCX](https://github.com/vrcx-team/VRCX) のフォーク版です。24時間365日稼働するクラウドサーバーを追加し、VRChat のフレンドのアクティビティを継続的に追跡します。ローカルの VRCX が起動していなくても、フレンドのオンライン/オフライン、場所の変更、Bio の更新などを記録します。[VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai) の機能も統合しています。
+
+### 主な機能
+
+- **24/7 クラウド追跡** — 軽量 Node.js サーバーをデプロイし、VRChat API を定期的にポーリング。フレンドの状態変化を SQLite に記録。
+- **リアルタイム同期** — デスクトップクライアントが REST API 経由でクラウドからデータを取得。
+- **プッシュ通知** — VIP フレンドの状態変化を Email/Telegram/QQ Bot で通知。
+- **Bio 変更履歴** — Bio の変更を自動検出しタイムスタンプ付きで保存。
+- **ステータス分布** — フレンドのステータス色分布を可視化。
+- **自己データ追跡** — 自分の位置とステータスの変化を記録。
+- **永続タイマー** — インスタンス滞在時間が再起動後も保持されます。
+- **マルチアカウント対応** — 独立したデータディレクトリで本番 VRCX と競合しません。
+
+### 謝辞
+
+- **[VRCX](https://github.com/vrcx-team/VRCX)** — オリジナルの VRChat コンパニオンアプリ。[pypy](https://github.com/pypy-vrc) と110名以上の貢献者に感謝します。
+- **[VRCX-jirai](https://github.com/FuLuTang/VRCX-jirai)** — Bio 追跡、ステータス分析、永続タイマー、検索強化などの機能のインスピレーション。
+
+---
+
+VRCX-Cloud is not endorsed by VRChat and does not reflect the views or opinions of VRChat or anyone officially involved in producing or managing VRChat properties. VRChat and all associated properties are trademarks or registered trademarks of VRChat Inc.

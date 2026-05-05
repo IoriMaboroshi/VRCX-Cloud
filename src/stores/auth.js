@@ -29,6 +29,7 @@ import { watchState } from '../services/watchState';
 import configRepository from '../services/config';
 import security from '../services/security';
 import webApiService from '../services/webapi';
+import * as cloudApi from '../services/cloudApi';
 
 import * as workerTimers from 'worker-timers';
 import { useActivityStore } from './activity';
@@ -1006,6 +1007,24 @@ export const useAuthStore = defineStore('Auth', () => {
         }
     }
 
+    async function pushCookieToCloud() {
+        if (!advancedSettingsStore.cloudSyncEnabled || !advancedSettingsStore.cloudServerUrl) {
+            return;
+        }
+        try {
+            cloudApi.configureCloud(advancedSettingsStore.cloudServerUrl, advancedSettingsStore.cloudApiKey);
+            var cookies = await webApiService.getCookies();
+            if (!cookies) {
+                console.warn('[Cloud] No cookies available to push');
+                return;
+            }
+            await cloudApi.pushCookie(cookies);
+            console.log('[Cloud] Cookie pushed successfully');
+        } catch (err) {
+            console.error('[Cloud] Failed to push cookie:', err);
+        }
+    }
+
     /**
      *
      */
@@ -1014,6 +1033,8 @@ export const useAuthStore = defineStore('Auth', () => {
         advancedSettingsStore.runAvatarAutoCleanup(userStore.currentUser.id);
         watchState.isLoggedIn = true;
         AppApi.CheckGameRunning(); // restore state from hot-reload
+
+        pushCookieToCloud();
 
         activityStore.startFullCacheBuild(userStore.currentUser.id);
     }

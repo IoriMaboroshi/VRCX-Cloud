@@ -115,6 +115,12 @@ const routes = [
                 component: () =>
                     import('./../views/Charts/components/HotWorlds.vue')
             },
+            {
+                path: 'charts/cloud-analytics',
+                name: 'charts-cloud-analytics',
+                component: () =>
+                    import('./../views/Charts/components/CloudAnalytics.vue')
+            },
             { path: 'tools', name: 'tools', component: Tools },
             {
                 path: 'tools/gallery',
@@ -159,6 +165,10 @@ router.beforeEach((to) => {
 
     const requiresAuth = to.matched.some((record) => record.meta?.requiresAuth);
     if (requiresAuth && !watchState.isLoggedIn) {
+        // Allow settings page access without login
+        if (to.name === 'settings') {
+            return true;
+        }
         const redirect = to.fullPath;
         if (redirect && redirect !== '/feed') {
             return { name: 'login', query: { redirect } };

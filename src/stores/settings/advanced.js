@@ -47,6 +47,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
     const screenshotHelperCopyToClipboard = ref(false);
     const youTubeApi = ref(false);
     const youTubeApiKey = ref('');
+    const cloudSyncEnabled = ref(false);
+    const cloudServerUrl = ref('');
+    const cloudApiKey = ref('');
     const translationApi = ref(false);
     const translationApiKey = ref('');
     const translationApiType = ref('google'); // 'google' | 'openai'
@@ -101,6 +104,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
             screenshotHelperCopyToClipboardConfig,
             youTubeApiConfig,
             youTubeApiKeyConfig,
+            cloudSyncEnabledConfig,
+            cloudServerUrlConfig,
+            cloudApiKeyConfig,
             translationApiConfig,
             translationApiKeyConfig,
             translationApiTypeConfig,
@@ -147,6 +153,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
             ),
             configRepository.getBool('VRCX_youtubeAPI', false),
             configRepository.getString('VRCX_youtubeAPIKey', ''),
+            configRepository.getBool('cloudSyncEnabled', false),
+            configRepository.getString('cloudServerUrl', ''),
+            configRepository.getString('cloudApiKey', ''),
             configRepository.getBool('VRCX_translationAPI', false),
             configRepository.getString('VRCX_translationAPIKey', ''),
             configRepository.getString('VRCX_translationAPIType', 'google'),
@@ -196,6 +205,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
             screenshotHelperCopyToClipboardConfig;
         youTubeApi.value = youTubeApiConfig;
         youTubeApiKey.value = youTubeApiKeyConfig;
+        cloudSyncEnabled.value = cloudSyncEnabledConfig;
+        cloudServerUrl.value = cloudServerUrlConfig;
+        cloudApiKey.value = cloudApiKeyConfig;
         translationApi.value = translationApiConfig;
         translationApiKey.value = translationApiKeyConfig;
         translationApiType.value = translationApiTypeConfig;
@@ -367,6 +379,27 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
         await configRepository.setString(
             'VRCX_youtubeAPIKey',
             youTubeApiKey.value
+        );
+    }
+    async function setCloudSyncEnabled(value) {
+        cloudSyncEnabled.value = value;
+        await configRepository.setBool(
+            'cloudSyncEnabled',
+            cloudSyncEnabled.value
+        );
+    }
+    async function setCloudServerUrl(value) {
+        cloudServerUrl.value = value;
+        await configRepository.setString(
+            'cloudServerUrl',
+            cloudServerUrl.value
+        );
+    }
+    async function setCloudApiKey(value) {
+        cloudApiKey.value = value;
+        await configRepository.setString(
+            'cloudApiKey',
+            cloudApiKey.value
         );
     }
     async function setTranslationApiKey(value) {
@@ -1118,6 +1151,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
         translationApi,
         youTubeApiKey,
         translationApiKey,
+        cloudSyncEnabled,
+        cloudServerUrl,
+        cloudApiKey,
         translationApiType,
         translationApiEndpoint,
         translationApiModel,
@@ -1160,6 +1196,9 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
         setTranslationApi,
         setYouTubeApiKey,
         setTranslationApiKey,
+        setCloudSyncEnabled,
+        setCloudServerUrl,
+        setCloudApiKey,
         setTranslationApiType,
         setTranslationApiEndpoint,
         setTranslationApiModel,

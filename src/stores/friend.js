@@ -31,6 +31,7 @@ import { useGeneralSettingsStore } from './settings/general';
 import { useGroupStore } from './group';
 import { useLocationStore } from './location';
 import { useUserStore } from './user';
+import { useCloudStore } from './cloud';
 import { watchState } from '../services/watchState';
 
 import configRepository from '../services/config';
@@ -43,6 +44,7 @@ export const useFriendStore = defineStore('Friend', () => {
     const userStore = useUserStore();
     const groupStore = useGroupStore();
     const locationStore = useLocationStore();
+    const cloudStore = useCloudStore();
 
     const router = useRouter();
     const t = i18n.global.t;
@@ -615,6 +617,28 @@ export const useFriendStore = defineStore('Friend', () => {
      * @returns {Promise<*[]>}
      */
     async function refreshFriends() {
+        // If cloud sync is enabled, pull from cloud server instead of VRChat API
+        if (cloudStore.shouldUseCloud()) {
+            isRefreshFriendsLoading.value = true;
+            try {
+                const cloudFriends = await cloudStore.fetchFriendsAsVRChat();
+                if (cloudFriends.length > 0) {
+                    // Process each friend through applyUser (same as VRChat API path)
+                    for (const friend of cloudFriends) {
+                        applyUser(friend);
+                    }
+                    // Run friend list sync logic
+                    refreshFriendsStatus(userStore.currentUser);
+                }
+                isRefreshFriendsLoading.value = false;
+                return cloudFriends;
+            } catch (err) {
+                console.error('[Cloud] Friend refresh failed, falling back to VRChat API:', err);
+                isRefreshFriendsLoading.value = false;
+                // Fall through to normal VRChat API path
+            }
+        }
+
         isRefreshFriendsLoading.value = true;
         try {
             const onlineFriends = await bulkRefreshFriends({
@@ -624,7 +648,9 @@ export const useFriendStore = defineStore('Friend', () => {
                 offline: true
             });
             var friends = onlineFriends.concat(offlineFriends);
-            friends = await refetchBrokenFriends(friends);
+            if (!cloudStore.shouldUseCloud()) {
+                friends = await refetchBrokenFriends(friends);
+            }
             if (!watchState.isFriendsLoaded) {
                 friends = await refreshRemainingFriends(friends);
             }
@@ -983,6 +1009,19 @@ export const useFriendStore = defineStore('Friend', () => {
         database.setFriendLogCurrentArray(sqlValues);
         await configRepository.setBool(`friendLogInit_${currentUser.id}`, true);
         watchState.isFriendsLoaded = true;
+
+        // Sync VIP friends to cloud server for push notifications
+        setTimeout(() => {
+            const vips = [];
+            for (const [id, ctx] of friends) {
+                if (ctx.isVIP) {
+                    vips.push({ id, displayName: ctx.name });
+                }
+            }
+            if (vips.length > 0) {
+                cloudStore.syncVipFriends(vips).catch(() => {});
+            }
+        }, 5000); // Wait 5s for everything to settle
     }
 
     /**

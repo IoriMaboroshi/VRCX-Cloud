@@ -2,11 +2,13 @@ class InteropApi {
     constructor() {
         return new Proxy(this, {
             get(target, prop) {
-                if (WINDOWS) {
+                // In CEF mode on Windows, globals are native; return undefined.
+                // In Electron mode, use the Proxy to create IPC method wrappers.
+                if (WINDOWS && typeof window.process === 'undefined' && typeof window.electron === 'undefined') {
                     return undefined;
                 }
-                // If the property is not a method of InteropApi,
-                // treat it as a .NET class name
+                // For any property not on the target, create a nested Proxy
+                // that maps method names to IPC calls.
                 if (typeof prop === 'string' && !target[prop]) {
                     return new Proxy(
                         {},

@@ -142,9 +142,36 @@
             </SettingsItem>
         </SettingsGroup>
 
+        <!-- VRCX Cloud Sync -->
+        <SettingsGroup :title="t('settings.integrations.cloud_settings.header')">
+            <template #description>
+                <p class="m-0">{{ t('settings.integrations.cloud_settings.section_description') }}</p>
+            </template>
+
+            <SettingsItem :label="t('settings.integrations.cloud_settings.cloud_sync_enable')">
+                <Switch
+                    :model-value="cloudSyncEnabled"
+                    @update:modelValue="setCloudSyncEnabled(!cloudSyncEnabled)" />
+            </SettingsItem>
+
+            <SettingsItem :label="t('settings.integrations.cloud_settings.server_url')">
+                <Button size="sm" variant="outline" @click="showCloudSettingsDialog">{{
+                    t('settings.integrations.cloud_settings.configure')
+                }}</Button>
+            </SettingsItem>
+
+            <SettingsItem :label="t('settings.integrations.cloud_settings.push_settings')">
+                <Button size="sm" variant="outline" @click="showPushSettingsDialog">{{
+                    t('settings.integrations.cloud_settings.push_settings')
+                }}</Button>
+            </SettingsItem>
+        </SettingsGroup>
+
         <TranslationApiDialog v-model:isTranslationApiDialogVisible="isTranslationApiDialogVisible" />
         <YouTubeApiDialog v-model:isYouTubeApiDialogVisible="isYouTubeApiDialogVisible" />
         <AvatarProviderDialog v-model:isAvatarProviderDialogVisible="isAvatarProviderDialogVisible" />
+        <CloudSettingsDialog v-model:isCloudSettingsDialogVisible="isCloudSettingsDialogVisible" />
+        <PushSettingsDialog v-model:isPushSettingsDialogVisible="isPushSettingsDialogVisible" />
     </div>
 </template>
 
@@ -166,6 +193,8 @@
     import AvatarProviderDialog from '../../dialogs/AvatarProviderDialog.vue';
     import TranslationApiDialog from '../../dialogs/TranslationApiDialog.vue';
     import YouTubeApiDialog from '../../dialogs/YouTubeApiDialog.vue';
+    import CloudSettingsDialog from '../../dialogs/CloudSettingsDialog.vue';
+    import PushSettingsDialog from '../../dialogs/PushSettingsDialog.vue';
     import SettingsGroup from '../SettingsGroup.vue';
     import SettingsItem from '../SettingsItem.vue';
 
@@ -199,15 +228,17 @@
 
     const { showVRChatConfig } = advancedSettingsStore;
 
-    const { avatarRemoteDatabase, youTubeApi, translationApi } = storeToRefs(advancedSettingsStore);
+    const { avatarRemoteDatabase, youTubeApi, translationApi, cloudSyncEnabled } = storeToRefs(advancedSettingsStore);
 
-    const { setAvatarRemoteDatabase } = advancedSettingsStore;
+    const { setAvatarRemoteDatabase, setCloudSyncEnabled } = advancedSettingsStore;
 
     const { isAvatarProviderDialogVisible } = storeToRefs(useAvatarProviderStore());
     const { showAvatarProviderDialog } = useAvatarProviderStore();
 
     const isYouTubeApiDialogVisible = ref(false);
     const isTranslationApiDialogVisible = ref(false);
+    const isCloudSettingsDialogVisible = ref(false);
+    const isPushSettingsDialogVisible = ref(false);
 
     /**
      *
@@ -221,6 +252,14 @@
      */
     function showTranslationApiDialog() {
         isTranslationApiDialogVisible.value = true;
+    }
+
+    function showCloudSettingsDialog() {
+        isCloudSettingsDialogVisible.value = true;
+    }
+
+    function showPushSettingsDialog() {
+        isPushSettingsDialogVisible.value = true;
     }
 
     /**

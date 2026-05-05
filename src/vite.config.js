@@ -161,6 +161,9 @@ export default defineConfig(({ mode }) => {
                 '@vueuse/core',
                 'vue-sonner',
                 'dayjs'
+            ],
+            exclude: [
+                './stores/cloud.js'
             ]
         },
         define: {

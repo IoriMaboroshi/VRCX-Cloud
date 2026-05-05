@@ -276,6 +276,16 @@
                         </div>
                     </PopoverContent>
                 </Popover>
+                <!-- Cloud status indicator -->
+                <TooltipWrapper v-if="cloudStore.isConfigured" side="bottom" :content="cloudStore.statusText">
+                    <span
+                        class="block w-2 h-2 rounded-full cursor-default"
+                        :class="{
+                            'bg-green-500': cloudStore.isConnected,
+                            'bg-yellow-500': !cloudStore.isConnected && cloudStore.syncEnabled,
+                            'bg-gray-400': !cloudStore.syncEnabled,
+                        }" />
+                </TooltipWrapper>
             </div>
         </div>
         <TabsUnderline
@@ -349,6 +359,7 @@
     import { runRefreshFriendsListFlow } from '../../coordinators/friendSyncCoordinator';
     import { normalizeFavoriteGroupsChange, resolveFavoriteGroups } from './sidebarSettingsUtils';
     import { useQuickSearchStore } from '../../stores/quickSearch';
+    import { useCloudStore } from '../../stores/cloud';
 
     import FriendsSidebar from './components/FriendsSidebar.vue';
     import QuickSearchDialog from '../../components/QuickSearchDialog.vue';
@@ -362,6 +373,7 @@
     const { isNotificationCenterOpen, hasUnseenNotifications } = storeToRefs(notificationStore);
     const { notificationLayout } = storeToRefs(useNotificationsSettingsStore());
     const quickSearchStore = useQuickSearchStore();
+    const cloudStore = useCloudStore();
     const { t } = useI18n();
 
     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
