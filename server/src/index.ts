@@ -22,7 +22,7 @@ async function main() {
 
 async function shutdown(signal: string) {
     logger.info(`Received ${signal}, shutting down...`);
-    try { closeWebSocket(); await fastify.close(); closeDb(); } catch(e) { logger.error(e); }
+    try { closeWebSocket(); await fastify.close(); closeDb(); } catch(e) { logger.error(String(e)); }
     process.exit(0);
 }
 
