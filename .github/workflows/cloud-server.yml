@@ -57,5 +57,5 @@ jobs:
           context: server
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}/vrcx-cloud:latest
-            ghcr.io/${{ github.repository }}/vrcx-cloud:${{ github.ref_name }}
+            ghcr.io/iorimaboroshi/vrcx-cloud/vrcx-cloud:latest
+            ghcr.io/iorimaboroshi/vrcx-cloud/vrcx-cloud:${{ github.ref_name }}
