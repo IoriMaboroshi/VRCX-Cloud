@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'server/**'
+      - '.github/workflows/cloud-server.yml'
     branches: [master, main]
   pull_request:
     paths:
@@ -11,6 +12,7 @@ on:
     branches: [master, main]
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   build:
