@@ -1,120 +1,22 @@
-// ============================================================
-// VRCX Cloud - Friend Polling Service (simplified)
-// ============================================================
-import { get } from './client.js';
-import { getDb } from '../../db/connection.js';
-import { logger } from '../../utils/logger.js';
-
-interface VRChatFriend {
-    id: string;
-    displayName: string;
-    location: string;
-    status: string;
-    statusDescription: string;
-    isFriend: boolean;
-    friendKey?: string;
-    bio?: string;
-    userIcon?: string;
-    tags: string[];
-    developerType: string;
-    last_activity?: string;
-    last_login?: string;
-    last_platform?: string;
-    currentAvatarImageUrl?: string;
-    currentAvatarThumbnailImageUrl?: string;
-}
-
-function parseLocationParts(location: string): [string | null, string | null] {
-    if (!location || location === 'offline' || location === 'private' || location === 'traveling') {
-        return [null, null];
-    }
-    let clean = location;
-    if (clean.startsWith('traveling:')) clean = clean.slice('traveling:'.length);
-    const idx = clean.indexOf(':');
-    if (idx === -1) return [clean, null];
-    return [clean.slice(0, idx), clean.slice(idx + 1)];
-}
-
+import { get } from './client.js'; import { getDb } from '../../db/connection.js'; import { logger } from '../../utils/logger.js';
+function parseLoc(l: string): [string|null,string|null] { if(!l||l==='offline'||l==='private'||l==='traveling') return [null,null]; let c=l.startsWith('traveling:')?l.slice(10):l; const i=c.indexOf(':'); return i===-1?[c,null]:[c.slice(0,i),c.slice(i+1)]; }
 export class FriendService {
     async fetchFriendsList() {
-        logger.info('Fetching friends list...');
-        const all: VRChatFriend[] = [];
-        const seen = new Set<string>();
-
-        for (const offline of [false, true]) {
-            let offset = 0;
-            const PAGE = 50;
-            while (offset <= 7500) {
-                const res = await get<unknown[]>(
-                    `/auth/user/friends?n=${PAGE}&offset=${offset}&offline=${offline}`,
-                );
-                if (res.status !== 200 || !Array.isArray(res.body)) break;
-                const batch = res.body as unknown as VRChatFriend[];
-                if (batch.length === 0) break;
-                for (const f of batch) {
-                    if (!seen.has(f.id)) { seen.add(f.id); all.push(f); }
-                }
-                if (batch.length < PAGE) break;
-                offset += PAGE;
-                await new Promise(r => setTimeout(r, 200));
-            }
-        }
-
-        logger.info(`Fetched ${all.length} friends`);
-        this.syncToDb(all);
-        return { total: all.length };
+        logger.info('Fetching friends...'); const all: Record<string,unknown>[] = []; const seen = new Set<string>();
+        for(const off of [false,true]) { let offs=0; while(offs<=7500){ const r=await get<Record<string,unknown>[]>('/auth/user/friends?n=50&offset='+offs+'&offline='+off); if(r.status!==200||!Array.isArray(r.body)) break; const b=r.body; for(const f of b){ if(!seen.has(f.id as string)){seen.add(f.id as string);all.push(f);} } if(b.length<50) break; offs+=50; } }
+        logger.info('Fetched '+all.length+' friends'); this._sync(all);
     }
-
-    private syncToDb(friends: VRChatFriend[]) {
-        const db = getDb();
-        const existing = db.prepare('SELECT user_id FROM friends').all() as { user_id: string }[];
-        const existingIds = new Set(existing.map(r => r.user_id));
-        const incomingIds = new Set(friends.map(f => f.id));
-
-        const upsert = db.prepare(`
-            INSERT OR REPLACE INTO friends (user_id, display_name, user_icon, bio, status, status_description,
-                location, world_id, instance_id, last_login, last_activity, friend_key, tags, developer_type,
-                last_platform, current_avatar_image_url, current_avatar_thumbnail_image_url, is_friend, updated_at)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime('now'))
-        `);
-
-        const insLoc = db.prepare(`
-            INSERT INTO location_history (user_id, display_name, location, world_id, instance_id, status, timestamp)
-            VALUES (?,?,?,?,?,?,datetime('now'))
-        `);
-
-        const insEvt = db.prepare(`
-            INSERT INTO friend_events (user_id, display_name, event_type, old_value, new_value, timestamp)
-            VALUES (?,?,?,?,?,datetime('now'))
-        `);
-
-        let added = 0, locChanges = 0;
-        for (const f of friends) {
-            const [wid, iid] = parseLocationParts(f.location);
-            upsert.run(f.id, f.displayName, f.userIcon||null, f.bio||null, f.status, f.statusDescription||null,
-                f.location, wid, iid, f.last_login||null, f.last_activity||null, f.friendKey||null,
-                JSON.stringify(f.tags||[]), f.developerType||'none', f.last_platform||null,
-                f.currentAvatarImageUrl||null, f.currentAvatarThumbnailImageUrl||null);
-
-            if (!existingIds.has(f.id)) {
-                added++;
-                insEvt.run(f.id, f.displayName, 'friend_added', null, f.displayName);
-            } else {
-                const old = db.prepare('SELECT location, display_name FROM friends WHERE user_id=?').get(f.id) as any;
-                if (old && old.location !== f.location) {
-                    locChanges++;
-                    insLoc.run(f.id, f.displayName, f.location, wid, iid, f.status);
-                    insEvt.run(f.id, f.displayName, 'location_changed', old.location, f.location);
-                }
-            }
+    private _sync(friends: Record<string,unknown>[]) {
+        const db = getDb(); let added=0, changed=0;
+        for(const f of friends){ const loc=(f.location as string)||'offline'; const [wid,iid]=parseLoc(loc);
+            const old = db.prepare('SELECT bio,location,status,display_name FROM friends WHERE user_id=?').get(f.id) as any;
+            db.prepare('INSERT OR REPLACE INTO friends(user_id,display_name,user_icon,bio,status,status_description,location,world_id,instance_id,last_login,last_activity,friend_key,tags,developer_type,last_platform,current_avatar_image_url,current_avatar_thumbnail_image_url,is_friend,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime(\'now\'))').run(f.id,f.displayName,f.userIcon||null,f.bio||null,f.status||'offline',f.statusDescription||null,loc,wid,iid,f.last_login||null,f.last_activity||null,f.friendKey||null,JSON.stringify(f.tags||[]),f.developerType||'none',f.last_platform||null,f.currentAvatarImageUrl||null,f.currentAvatarThumbnailImageUrl||null);
+            if(!old) { added++; db.prepare('INSERT INTO friend_events(user_id,display_name,event_type,new_value) VALUES(?,?,?,?)').run(f.id,f.displayName,'friend_added',f.displayName); }
+            else { if(old.bio!==(f.bio||''))db.prepare('INSERT INTO bio_history(user_id,display_name,bio) VALUES(?,?,?)').run(f.id,f.displayName,f.bio||''); if(old.location!==loc){changed++;db.prepare('INSERT INTO location_history(user_id,display_name,location,world_id,instance_id,status) VALUES(?,?,?,?,?,?)').run(f.id,f.displayName,loc,wid,iid,f.status||'offline');db.prepare('INSERT INTO friend_events(user_id,display_name,event_type,old_value,new_value) VALUES(?,?,?,?,?)').run(f.id,f.displayName,'location_changed',old.location,loc);} }
         }
-
-        for (const id of existingIds) {
-            if (!incomingIds.has(id)) {
-                db.prepare("UPDATE friends SET is_friend=0, updated_at=datetime('now') WHERE user_id=?").run(id);
-            }
-        }
-
-        logger.info(`Friend sync: ${friends.length} total, +${added} new, ${locChanges} location changes`);
+        logger.info('Sync: +'+added+' new, '+changed+' location changes, '+friends.length+' total');
     }
+    async handlePresence(uid: string, state: string, c: Record<string,unknown>) { const db = getDb(); const old = db.prepare('SELECT location FROM friends WHERE user_id=?').get(uid) as any; const loc=(c.location as string)||(old?.location as string)||'offline'; const [w,i]=parseLoc(loc); const nm=(c.user as any)?.displayName||uid; db.prepare('INSERT OR REPLACE INTO friends(user_id,display_name,status,status_description,location,world_id,instance_id,tags,is_friend,updated_at) VALUES(?,?,?,?,?,?,?,?,1,datetime(\'now\'))').run(uid,nm,state,(c.user as any)?.statusDescription||null,loc,w,i,JSON.stringify((c.user as any)?.tags||[])); if(!old||old.location!==loc){ db.prepare('INSERT INTO location_history(user_id,display_name,location,world_id,instance_id,status) VALUES(?,?,?,?,?,?)').run(uid,nm,loc,w,i,state); if(old) db.prepare('INSERT INTO friend_events(user_id,display_name,event_type,old_value,new_value) VALUES(?,?,?,?,?)').run(uid,nm,'location_changed',old.location,loc); } }
+    async handleDelete(uid: string) { const db = getDb(); const old = db.prepare('SELECT display_name FROM friends WHERE user_id=?').get(uid) as any; if(old){ db.prepare("UPDATE friends SET is_friend=0,updated_at=datetime('now') WHERE user_id=?").run(uid); db.prepare('INSERT INTO friend_events(user_id,display_name,event_type) VALUES(?,?,?)').run(uid,old.display_name,'friend_removed'); } }
+    async refreshSingle(uid: string) { try{ const r=await get<Record<string,unknown>>('/users/'+uid); if(r.status!==200)return; const u=r.body;const loc=(u.location as string)||'offline';const[w,i]=parseLoc(loc); const db=getDb(); db.prepare('INSERT OR REPLACE INTO friends(user_id,display_name,user_icon,bio,status,status_description,location,world_id,instance_id,last_login,last_activity,friend_key,tags,developer_type,last_platform,current_avatar_image_url,current_avatar_thumbnail_image_url,is_friend,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1,datetime(\'now\'))').run(u.id||uid,u.displayName||uid,u.userIcon||null,u.bio||null,u.status||'offline',u.statusDescription||null,loc,w,i,u.last_login||null,u.last_activity||null,u.friendKey||null,JSON.stringify(u.tags||[]),u.developerType||'none',u.last_platform||null,u.currentAvatarImageUrl||null,u.currentAvatarThumbnailImageUrl||null); }catch{} }
 }

@@ -1,0 +1,5 @@
+# VRCX-Cloud Server
+
+/data/          # SQLite database directory (gitignored)
+/dist/          # TypeScript build output
+/node_modules/  # Dependencies

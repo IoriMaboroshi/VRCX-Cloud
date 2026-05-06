@@ -1,0 +1,2 @@
+import type { Channel } from './channel.js'; import { logger } from '../../../utils/logger.js'  ;
+export function createTelegramChannel(cfg: {botToken:string;chatId:string}): Channel { return {type:'telegram',send:async(m)=>{try{const r=await fetch('https://api.telegram.org/bot'+cfg.botToken+'/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:cfg.chatId,text:m})});if(!r.ok)return{success:false,error:'HTTP '+r.status};return{success:true};}catch(e:any){return{success:false,error:e.message}} }}; }
