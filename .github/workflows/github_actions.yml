@@ -396,7 +396,7 @@ jobs:
                   path: artifacts
             - uses: actions/download-artifact@v8
               with:
-                  name: VRCX-Setup
+                  name: Cef-Setup
                   path: artifacts
             - uses: actions/download-artifact@v8
               with:
