@@ -28,7 +28,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: server/package-lock.json
 
-      - run: npm ci --registry https://registry.npmmirror.com
+      - run: npm ci --no-audit --no-fund --prefer-offline || npm ci --no-audit --no-fund
       - run: npm run build
       - run: npm run typecheck --if-present || true
 
