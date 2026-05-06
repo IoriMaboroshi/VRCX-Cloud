@@ -117,7 +117,7 @@
         "npm": ">=11.5.0"
     },
     "build": {
-        "appId": "app.vrcx-dev",
+        "appId": "app.vrcx-cloud",
         "productName": "VRCX",
         "icon": "images/VRCX.png",
         "files": [

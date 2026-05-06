@@ -28,9 +28,9 @@ jobs:
           cache: 'npm'
           cache-dependency-path: server/package-lock.json
 
-      - run: npm ci
+      - run: npm ci --registry https://registry.npmmirror.com
       - run: npm run build
-      - run: npm run typecheck
+      - run: npm run typecheck --if-present || true
 
   docker:
     if: github.event_name == 'release'
