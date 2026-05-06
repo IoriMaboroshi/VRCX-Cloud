@@ -388,7 +388,7 @@ jobs:
     make_release:
         if: github.event_name == 'release' && github.event.action == 'published'
         runs-on: ubuntu-latest
-        needs: [set_version, build_setup, build_zip, build_electron_linux, build_electron_macos]
+        needs: [set_version, build_dotnet_windows, build_dotnet_linux, build_dotnet_macos, build_node, build_macos, create_setup]
         steps:
             - uses: actions/download-artifact@v8
               with:
