@@ -66,8 +66,8 @@
 <script setup>
     import { ref, computed, onMounted } from 'vue';
     import { Button } from '@/components/ui/button';
-    import * as cloudApi from '../../services/cloudApi';
-    import { useCloudStore } from '../../stores/cloud';
+    import * as cloudApi from '../../../services/cloudApi';
+    import { useCloudStore } from '../../../stores/cloud';
 
     const cloudStore = useCloudStore();
     const statusDist = ref(null);
