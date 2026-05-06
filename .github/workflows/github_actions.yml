@@ -392,6 +392,15 @@ jobs:
         steps:
             - uses: actions/download-artifact@v8
               with:
+                  name: VRCX-Zip
+                  path: artifacts
+            - uses: actions/download-artifact@v8
+              with:
+                  name: VRCX-Setup
+                  path: artifacts
+            - uses: actions/download-artifact@v8
+              with:
+                  name: Cef-Release
                   path: artifacts
             - name: Display structure
               run: ls -R artifacts
@@ -399,13 +408,6 @@ jobs:
               uses: softprops/action-gh-release@v1
               with:
                   name: VRCX-Cloud ${{ needs.set_version.outputs.version }}
-                  body: |
-                      VRCX-Cloud ${{ needs.set_version.outputs.version }}
-                      
-                      - 24/7 Cloud Server for friend tracking
-                      - Push notifications (Email/Telegram/QQ)
-                      - Bio change history & analytics
-                      - Syncs with upstream VRCX ${{ needs.set_version.outputs.version }}
-                  files: artifacts/**/*
+                  files: artifacts/*
                   draft: false
                   prerelease: false
