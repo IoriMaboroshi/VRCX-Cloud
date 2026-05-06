@@ -1,7 +1,12 @@
-name: VRCX
+name: VRCX-Cloud Desktop Build
 
 on:
-    - workflow_dispatch
+    workflow_dispatch:
+    push:
+        tags:
+            - 'v*'
+    release:
+        types: [published]
 
 concurrency:
     group: ${{ github.ref }}
@@ -377,5 +382,30 @@ jobs:
             - name: Upload Zip artifact
               uses: actions/upload-artifact@v7
               with:
-                  name: VRCX-Zip
-                  path: 'VRCX_${{ needs.set_version.outputs.version }}.zip'
+                   name: VRCX-Zip
+                   path: 'VRCX_${{ needs.set_version.outputs.version }}.zip'
+
+    make_release:
+        if: github.event_name == 'release' && github.event.action == 'published'
+        runs-on: ubuntu-latest
+        needs: [set_version, build_setup, build_zip, build_electron_linux, build_electron_macos]
+        steps:
+            - uses: actions/download-artifact@v8
+              with:
+                  path: artifacts
+            - name: Display structure
+              run: ls -R artifacts
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  name: VRCX-Cloud ${{ needs.set_version.outputs.version }}
+                  body: |
+                      VRCX-Cloud ${{ needs.set_version.outputs.version }}
+                      
+                      - 24/7 Cloud Server for friend tracking
+                      - Push notifications (Email/Telegram/QQ)
+                      - Bio change history & analytics
+                      - Syncs with upstream VRCX ${{ needs.set_version.outputs.version }}
+                  files: artifacts/**/*
+                  draft: false
+                  prerelease: false
