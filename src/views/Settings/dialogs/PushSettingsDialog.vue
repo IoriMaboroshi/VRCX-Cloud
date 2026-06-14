@@ -6,7 +6,8 @@
             </DialogHeader>
 
             <div class="text-xs text-muted-foreground mb-4">
-                Configure where to send push notifications when tracked (VIP) friends come online, go offline, or change location.
+                Configure where to send push notifications when tracked (VIP) friends come online, go offline, or change
+                location.
             </div>
 
             <!-- Channels -->
@@ -14,7 +15,9 @@
                 <div v-for="channel in channels" :key="channel.id" class="border rounded-lg p-3">
                     <div class="flex items-center justify-between mb-2">
                         <div class="flex items-center gap-2">
-                            <span class="text-xs px-2 py-0.5 rounded-full" :class="channelTypeBadge(channel.channel_type)">
+                            <span
+                                class="text-xs px-2 py-0.5 rounded-full"
+                                :class="channelTypeBadge(channel.channel_type)">
                                 {{ channel.channel_type.toUpperCase() }}
                             </span>
                             <span class="text-sm font-medium">{{ channel.label }}</span>
@@ -23,7 +26,11 @@
                             <Button size="icon-xs" variant="ghost" @click="editChannel(channel)">
                                 <Pencil class="size-3.5" />
                             </Button>
-                            <Button size="icon-xs" variant="ghost" class="text-red-500" @click="confirmDelete(channel.id)">
+                            <Button
+                                size="icon-xs"
+                                variant="ghost"
+                                class="text-red-500"
+                                @click="confirmDelete(channel.id)">
                                 <Trash2 class="size-3.5" />
                             </Button>
                         </div>
@@ -51,42 +58,78 @@
                     <option value="qqbot">QQ Bot (NapQQ)</option>
                 </select>
 
-                <input v-model="formLabel" placeholder="Label (e.g. 'My Gmail')" class="w-full border rounded px-2 py-1.5 text-sm" />
+                <input
+                    v-model="formLabel"
+                    placeholder="Label (e.g. 'My Gmail')"
+                    class="w-full border rounded px-2 py-1.5 text-sm" />
 
                 <!-- Email config -->
                 <template v-if="formType === 'email'">
-                    <input v-model="formConfig.smtpHost" placeholder="SMTP Host (smtp.gmail.com)" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.smtpPort" placeholder="SMTP Port (587)" type="number" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.smtpUser" placeholder="SMTP User" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.smtpPass" placeholder="SMTP Password" type="password" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.fromEmail" placeholder="From Email" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.toEmail" placeholder="To Email" class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.smtpHost"
+                        placeholder="SMTP Host (smtp.gmail.com)"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.smtpPort"
+                        placeholder="SMTP Port (587)"
+                        type="number"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.smtpUser"
+                        placeholder="SMTP User"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.smtpPass"
+                        placeholder="SMTP Password"
+                        type="password"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.fromEmail"
+                        placeholder="From Email"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.toEmail"
+                        placeholder="To Email"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
                 </template>
 
                 <!-- Telegram config -->
                 <template v-if="formType === 'telegram'">
-                    <input v-model="formConfig.botToken" placeholder="Bot Token (123:ABC)" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.chatId" placeholder="Chat ID" class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.botToken"
+                        placeholder="Bot Token (123:ABC)"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.chatId"
+                        placeholder="Chat ID"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
                 </template>
 
                 <!-- QQ Bot config -->
                 <template v-if="formType === 'qqbot'">
-                    <input v-model="formConfig.apiUrl" placeholder="API URL (http://127.0.0.1:3000)" class="w-full border rounded px-2 py-1.5 text-sm" />
-                    <input v-model="formConfig.token" placeholder="Access Token" class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.apiUrl"
+                        placeholder="API URL (http://127.0.0.1:3000)"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.token"
+                        placeholder="Access Token"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
                     <select v-model="formConfig.targetType" class="w-full border rounded px-2 py-1.5 text-sm">
                         <option value="user">User</option>
                         <option value="group">Group</option>
                     </select>
-                    <input v-model="formConfig.targetId" placeholder="Target ID" class="w-full border rounded px-2 py-1.5 text-sm" />
+                    <input
+                        v-model="formConfig.targetId"
+                        placeholder="Target ID"
+                        class="w-full border rounded px-2 py-1.5 text-sm" />
                 </template>
 
                 <div class="flex gap-2">
                     <Button size="sm" @click="saveChannel">
                         {{ editingId ? 'Update' : 'Add' }}
                     </Button>
-                    <Button size="sm" variant="ghost" @click="cancelForm">
-                        Cancel
-                    </Button>
+                    <Button size="sm" variant="ghost" @click="cancelForm"> Cancel </Button>
                 </div>
             </div>
 
@@ -106,7 +149,7 @@
     import * as cloudApi from '../../../services/cloudApi';
 
     const props = defineProps({
-        isPushSettingsDialogVisible: { type: Boolean, default: false },
+        isPushSettingsDialogVisible: { type: Boolean, default: false }
     });
     const emit = defineEmits(['update:isPushSettingsDialogVisible']);
 
@@ -121,11 +164,17 @@
         try {
             const res = await cloudApi.getPushChannels();
             channels.value = res.channels || [];
-        } catch (e) { /* ignore */ }
+        } catch (e) {
+            /* ignore */
+        }
     }
 
     function channelTypeBadge(type) {
-        const map = { email: 'bg-blue-100 text-blue-700', telegram: 'bg-sky-100 text-sky-700', qqbot: 'bg-green-100 text-green-700' };
+        const map = {
+            email: 'bg-blue-100 text-blue-700',
+            telegram: 'bg-sky-100 text-sky-700',
+            qqbot: 'bg-green-100 text-green-700'
+        };
         return map[type] || 'bg-gray-100 text-gray-700';
     }
 
@@ -141,7 +190,7 @@
         editingId.value = null;
         formType.value = '';
         formLabel.value = '';
-        Object.keys(formConfig).forEach(k => delete formConfig[k]);
+        Object.keys(formConfig).forEach((k) => delete formConfig[k]);
         showForm.value = true;
     }
 
@@ -150,13 +199,16 @@
         formType.value = channel.channel_type;
         formLabel.value = channel.label;
         const cfg = typeof channel.config === 'string' ? JSON.parse(channel.config) : channel.config;
-        Object.keys(formConfig).forEach(k => delete formConfig[k]);
+        Object.keys(formConfig).forEach((k) => delete formConfig[k]);
         Object.assign(formConfig, cfg);
         showForm.value = true;
     }
 
     async function saveChannel() {
-        if (!formType.value) { toast.error('Select a channel type'); return; }
+        if (!formType.value) {
+            toast.error('Select a channel type');
+            return;
+        }
         const data = { channelType: formType.value, label: formLabel.value, config: { ...formConfig } };
         try {
             if (editingId.value) {
@@ -172,7 +224,9 @@
         }
     }
 
-    function cancelForm() { showForm.value = false; }
+    function cancelForm() {
+        showForm.value = false;
+    }
 
     async function confirmDelete(id) {
         try {
@@ -189,7 +243,12 @@
     }
 
     // Load channels when dialog opens
-    const unwatch = watch(() => props.isPushSettingsDialogVisible, (val) => { if (val) loadChannels(); });
+    const unwatch = watch(
+        () => props.isPushSettingsDialogVisible,
+        (val) => {
+            if (val) loadChannels();
+        }
+    );
     onUnmounted(() => unwatch());
 </script>
 

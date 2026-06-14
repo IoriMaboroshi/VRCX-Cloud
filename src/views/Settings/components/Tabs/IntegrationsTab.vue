@@ -149,9 +149,7 @@
             </template>
 
             <SettingsItem :label="t('settings.integrations.cloud_settings.cloud_sync_enable')">
-                <Switch
-                    :model-value="cloudSyncEnabled"
-                    @update:modelValue="setCloudSyncEnabled(!cloudSyncEnabled)" />
+                <Switch :model-value="cloudSyncEnabled" @update:modelValue="setCloudSyncEnabled(!cloudSyncEnabled)" />
             </SettingsItem>
 
             <SettingsItem :label="t('settings.integrations.cloud_settings.server_url')">

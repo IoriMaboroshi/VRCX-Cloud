@@ -283,7 +283,7 @@
                         :class="{
                             'bg-green-500': cloudStore.isConnected,
                             'bg-yellow-500': !cloudStore.isConnected && cloudStore.syncEnabled,
-                            'bg-gray-400': !cloudStore.syncEnabled,
+                            'bg-gray-400': !cloudStore.syncEnabled
                         }" />
                 </TooltipWrapper>
             </div>

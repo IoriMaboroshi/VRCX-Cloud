@@ -1008,11 +1008,17 @@ export const useAuthStore = defineStore('Auth', () => {
     }
 
     async function pushCookieToCloud() {
-        if (!advancedSettingsStore.cloudSyncEnabled || !advancedSettingsStore.cloudServerUrl) {
+        if (
+            !advancedSettingsStore.cloudSyncEnabled ||
+            !advancedSettingsStore.cloudServerUrl
+        ) {
             return;
         }
         try {
-            cloudApi.configureCloud(advancedSettingsStore.cloudServerUrl, advancedSettingsStore.cloudApiKey);
+            cloudApi.configureCloud(
+                advancedSettingsStore.cloudServerUrl,
+                advancedSettingsStore.cloudApiKey
+            );
             var cookies = await webApiService.getCookies();
             if (!cookies) {
                 console.warn('[Cloud] No cookies available to push');

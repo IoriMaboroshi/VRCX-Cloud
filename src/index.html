@@ -21,11 +21,24 @@
         <script>
             // Expose Electron IPC globals for ES module compatibility.
             var _globalStore = {};
-            ['AppApi','WebApi','VRCXStorage','SQLite','LogWatcher','Discord','AssetBundleManager'].forEach(function(name) {
+            [
+                'AppApi',
+                'WebApi',
+                'VRCXStorage',
+                'SQLite',
+                'LogWatcher',
+                'Discord',
+                'AssetBundleManager'
+            ].forEach(function (name) {
                 Object.defineProperty(globalThis, name, {
-                    get: function() { return _globalStore[name]; },
-                    set: function(v) { _globalStore[name] = v; },
-                    configurable: true, enumerable: true
+                    get: function () {
+                        return _globalStore[name];
+                    },
+                    set: function (v) {
+                        _globalStore[name] = v;
+                    },
+                    configurable: true,
+                    enumerable: true
                 });
             });
         </script>

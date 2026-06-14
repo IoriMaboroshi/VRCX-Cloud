@@ -49,7 +49,8 @@ export const useCloudStore = defineStore('cloud', () => {
     const statusText = computed(() => {
         if (!isConfigured.value) return '未配置';
         if (isConnecting.value) return '连接中...';
-        if (isConnected.value) return `已连接 · ${cloudUser.value?.displayName || ''}`;
+        if (isConnected.value)
+            return `已连接 · ${cloudUser.value?.displayName || ''}`;
         if (connectionError.value) return `错误: ${connectionError.value}`;
         return '未连接';
     });
@@ -111,7 +112,8 @@ export const useCloudStore = defineStore('cloud', () => {
             cloudUser.value = result.user || null;
 
             if (!result.authenticated) {
-                connectionError.value = '服务器未登录 VRChat，请先在桌面端登录后推送 Cookie';
+                connectionError.value =
+                    '服务器未登录 VRChat，请先在桌面端登录后推送 Cookie';
             }
 
             return result.authenticated;
@@ -172,11 +174,17 @@ export const useCloudStore = defineStore('cloud', () => {
                 last_activity: f.last_activity || '',
                 last_login: f.last_login || '',
                 currentAvatarImageUrl: f.current_avatar_image_url || '',
-                currentAvatarThumbnailImageUrl: f.current_avatar_thumbnail_image_url || '',
+                currentAvatarThumbnailImageUrl:
+                    f.current_avatar_thumbnail_image_url || '',
                 // VRCX-specific state
-                state: f.location && f.location !== 'offline' ? 'online' : 'offline',
+                state:
+                    f.location && f.location !== 'offline'
+                        ? 'online'
+                        : 'offline',
                 // Persistent Timer (jirai-inspired): restore location timestamp
-                $location_at: f.updated_at ? new Date(f.updated_at + 'Z').getTime() : undefined,
+                $location_at: f.updated_at
+                    ? new Date(f.updated_at + 'Z').getTime()
+                    : undefined
             }));
 
             lastSyncAt.value = new Date().toISOString();
@@ -206,7 +214,7 @@ export const useCloudStore = defineStore('cloud', () => {
                 message: n.message || '',
                 details: parseTags(n.details),
                 seen: !!n.seen,
-                created_at: n.created_at || '',
+                created_at: n.created_at || ''
             }));
 
             return notifications;
@@ -238,7 +246,7 @@ export const useCloudStore = defineStore('cloud', () => {
                     notifyOnline: true,
                     notifyOffline: true,
                     notifyLocation: true,
-                    notifyStatus: false,
+                    notifyStatus: false
                 });
             }
             console.log('[Cloud] Synced', vipFriends.length, 'VIP friends');
@@ -280,6 +288,6 @@ export const useCloudStore = defineStore('cloud', () => {
         fetchFriendsAsVRChat,
         fetchNotificationsAsVRChat,
         syncVipFriends,
-        shouldUseCloud,
+        shouldUseCloud
     };
 });

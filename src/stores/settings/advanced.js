@@ -397,10 +397,7 @@ export const useAdvancedSettingsStore = defineStore('AdvancedSettings', () => {
     }
     async function setCloudApiKey(value) {
         cloudApiKey.value = value;
-        await configRepository.setString(
-            'cloudApiKey',
-            cloudApiKey.value
-        );
+        await configRepository.setString('cloudApiKey', cloudApiKey.value);
     }
     async function setTranslationApiKey(value) {
         translationApiKey.value = value;

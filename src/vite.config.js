@@ -162,9 +162,7 @@ export default defineConfig(({ mode }) => {
                 'vue-sonner',
                 'dayjs'
             ],
-            exclude: [
-                './stores/cloud.js'
-            ]
+            exclude: ['./stores/cloud.js']
         },
         define: {
             LINUX: JSON.stringify(process.env.PLATFORM === 'linux'),

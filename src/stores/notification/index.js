@@ -727,19 +727,23 @@ export const useNotificationStore = defineStore('Notification', () => {
         if (cloudStore.shouldUseCloud()) {
             isNotificationsLoading.value = true;
             try {
-                const cloudNotifications = await cloudStore.fetchNotificationsAsVRChat();
+                const cloudNotifications =
+                    await cloudStore.fetchNotificationsAsVRChat();
                 if (cloudNotifications.length > 0) {
                     for (const json of cloudNotifications) {
                         handleNotification({
                             json,
-                            params: { notificationId: json.id },
+                            params: { notificationId: json.id }
                         });
                     }
                 }
                 isNotificationsLoading.value = false;
                 return;
             } catch (err) {
-                console.error('[Cloud] Notification refresh failed, falling back to VRChat API:', err);
+                console.error(
+                    '[Cloud] Notification refresh failed, falling back to VRChat API:',
+                    err
+                );
                 isNotificationsLoading.value = false;
                 // Fall through to normal VRChat API path
             }

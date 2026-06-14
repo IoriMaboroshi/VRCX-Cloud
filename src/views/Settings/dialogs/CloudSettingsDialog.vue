@@ -10,10 +10,7 @@
             </div>
 
             <div class="text-xs font-medium mb-1">{{ t('settings.integrations.cloud_settings.server_url') }}</div>
-            <InputGroupField
-                v-model="cloudServerUrl"
-                :placeholder="'https://your-server.com'"
-                class="mb-3" />
+            <InputGroupField v-model="cloudServerUrl" :placeholder="'https://your-server.com'" class="mb-3" />
 
             <div class="text-xs font-medium mb-1">{{ t('settings.integrations.cloud_settings.api_key') }}</div>
             <InputGroupTextareaField
@@ -23,7 +20,9 @@
                 class="mb-3" />
 
             <div v-if="connectionStatus" class="text-xs mb-3 flex items-center gap-2">
-                <span class="inline-block w-2 h-2 rounded-full" :class="connectionStatus.connected ? 'bg-green-500' : 'bg-red-500'" />
+                <span
+                    class="inline-block w-2 h-2 rounded-full"
+                    :class="connectionStatus.connected ? 'bg-green-500' : 'bg-red-500'" />
                 <span>{{ connectionStatus.text }}</span>
             </div>
 
@@ -72,7 +71,9 @@
         } catch (err) {
             connectionStatus.value = { connected: false, text: err.message || 'Connection failed' };
             toast.error('Connection failed');
-        } finally { testing.value = false; }
+        } finally {
+            testing.value = false;
+        }
     }
 
     async function saveSettings() {
@@ -83,5 +84,7 @@
         closeDialog();
     }
 
-    function closeDialog() { emit('update:isCloudSettingsDialogVisible', false); }
+    function closeDialog() {
+        emit('update:isCloudSettingsDialogVisible', false);
+    }
 </script>

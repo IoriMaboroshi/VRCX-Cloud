@@ -633,7 +633,10 @@ export const useFriendStore = defineStore('Friend', () => {
                 isRefreshFriendsLoading.value = false;
                 return cloudFriends;
             } catch (err) {
-                console.error('[Cloud] Friend refresh failed, falling back to VRChat API:', err);
+                console.error(
+                    '[Cloud] Friend refresh failed, falling back to VRChat API:',
+                    err
+                );
                 isRefreshFriendsLoading.value = false;
                 // Fall through to normal VRChat API path
             }

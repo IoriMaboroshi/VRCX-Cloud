@@ -1,6 +1,29 @@
 /// <reference types="node" />
 /// <reference types="jest" />
 
+declare module 'vue-sonner' {
+    interface ToastFunction {
+        (message: string, options?: Record<string, any>): void;
+        success: (message: string, options?: Record<string, any>) => void;
+        error: (message: string, options?: Record<string, any>) => void;
+        info: (message: string, options?: Record<string, any>) => void;
+        warning: (message: string, options?: Record<string, any>) => void;
+        message: (message: string, options?: Record<string, any>) => void;
+        loading: (message: string, options?: Record<string, any>) => void;
+        dismiss: (toastId?: string | number) => void;
+        promise: <T>(
+            promise: Promise<T>,
+            options: {
+                loading?: string;
+                success?: string | ((data: T) => string);
+                error?: string | ((error: any) => string);
+            }
+        ) => void;
+    }
+    export const toast: ToastFunction;
+    export const Toaster: any;
+}
+
 declare global {
     const VERSION: string;
     const NIGHTLY: boolean;

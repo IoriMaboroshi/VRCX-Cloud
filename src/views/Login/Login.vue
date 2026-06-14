@@ -3,7 +3,11 @@
         <div class="m-1.5" style="position: absolute; top: 0; left: 0">
             <LoginSettingsDialog />
             <TooltipWrapper side="top" :content="'VRCX Cloud Sync'">
-                <Button class="rounded-full mr-2 text-xs" size="icon-sm" variant="ghost" @click="isCloudDialogOpen = true">
+                <Button
+                    class="rounded-full mr-2 text-xs"
+                    size="icon-sm"
+                    variant="ghost"
+                    @click="isCloudDialogOpen = true">
                     <Cloud />
                 </Button>
             </TooltipWrapper>

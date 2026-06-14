@@ -22,9 +22,21 @@ await initPlugins();
 const app = createApp(App);
 
 app.use(pinia).use(i18n).use(VueQueryPlugin, { queryClient });
-try { await initPiniaPlugins(); } catch(e) { console.error('initPiniaPlugins:', e); }
-try { await configRepository.init(); } catch(e) { console.error('configRepo:', e); }
-try { await initUiPlugins(); } catch(e) { console.error('initUi:', e); }
+try {
+    await initPiniaPlugins();
+} catch (e) {
+    console.error('initPiniaPlugins:', e);
+}
+try {
+    await configRepository.init();
+} catch (e) {
+    console.error('configRepo:', e);
+}
+try {
+    await initUiPlugins();
+} catch (e) {
+    console.error('initUi:', e);
+}
 initComponents(app);
 initRouter(app);
 await initSentry(app);

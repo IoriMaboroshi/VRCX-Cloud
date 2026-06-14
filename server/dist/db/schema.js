@@ -1,0 +1,19 @@
+import { getDb } from './connection.js';
+export function initSchema() {
+    const db = getDb();
+    db.exec(`CREATE TABLE IF NOT EXISTS auth(id INTEGER PRIMARY KEY CHECK(id=1),encrypted_cookie TEXT NOT NULL,updated_at TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS friends(user_id TEXT PRIMARY KEY,display_name TEXT NOT NULL,user_icon TEXT,bio TEXT,status TEXT DEFAULT'offline',status_description TEXT,location TEXT DEFAULT'offline',world_id TEXT,instance_id TEXT,last_login TEXT,last_activity TEXT,friend_key TEXT,tags TEXT DEFAULT'[]',developer_type TEXT DEFAULT'none',last_platform TEXT,current_avatar_image_url TEXT,current_avatar_thumbnail_image_url TEXT,is_friend INTEGER DEFAULT 1,updated_at TEXT DEFAULT(datetime('now')),created_at TEXT DEFAULT(datetime('now')));
+        CREATE INDEX IF NOT EXISTS idx_friends_updated ON friends(updated_at);
+        CREATE TABLE IF NOT EXISTS location_history(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id TEXT NOT NULL,display_name TEXT NOT NULL,location TEXT NOT NULL,world_id TEXT,world_name TEXT,instance_id TEXT,status TEXT NOT NULL,status_description TEXT,timestamp TEXT DEFAULT(datetime('now')));
+        CREATE INDEX IF NOT EXISTS idx_location_user ON location_history(user_id,timestamp);
+        CREATE TABLE IF NOT EXISTS friend_events(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id TEXT NOT NULL,display_name TEXT NOT NULL,event_type TEXT NOT NULL,old_value TEXT,new_value TEXT,timestamp TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS notifications(notification_id TEXT PRIMARY KEY,type TEXT NOT NULL,sender_user_id TEXT,sender_username TEXT,receiver_user_id TEXT,message TEXT,details TEXT DEFAULT'{}',seen INTEGER DEFAULT 0,created_at TEXT NOT NULL,our_updated_at TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS worlds(world_id TEXT PRIMARY KEY,name TEXT NOT NULL,author_id TEXT,author_name TEXT,description TEXT,image_url TEXT,thumbnail_image_url TEXT,capacity INTEGER,visits INTEGER,favorites INTEGER,popularity INTEGER,heat INTEGER,tags TEXT DEFAULT'[]',platform_tags TEXT DEFAULT'[]',release_status TEXT,version INTEGER,updated_at TEXT DEFAULT(datetime('now')),created_at TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS avatars(avatar_id TEXT PRIMARY KEY,name TEXT NOT NULL,author_id TEXT,author_name TEXT,description TEXT,image_url TEXT,thumbnail_image_url TEXT,release_status TEXT,version INTEGER,tags TEXT DEFAULT'[]',platform_tags TEXT DEFAULT'[]',updated_at TEXT DEFAULT(datetime('now')),created_at TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS tracked_friends(user_id TEXT PRIMARY KEY,display_name TEXT NOT NULL,added_at TEXT DEFAULT(datetime('now')),notify_online INTEGER DEFAULT 1,notify_offline INTEGER DEFAULT 1,notify_location INTEGER DEFAULT 1,notify_status INTEGER DEFAULT 0);
+        CREATE TABLE IF NOT EXISTS push_channels(id INTEGER PRIMARY KEY AUTOINCREMENT,channel_type TEXT NOT NULL CHECK(channel_type IN('email','telegram','qqbot')),enabled INTEGER DEFAULT 1,label TEXT DEFAULT'',config TEXT DEFAULT'{}',created_at TEXT DEFAULT(datetime('now')),updated_at TEXT DEFAULT(datetime('now')));
+        CREATE TABLE IF NOT EXISTS push_events(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id TEXT NOT NULL,event_type TEXT NOT NULL,channel_type TEXT NOT NULL,message TEXT NOT NULL,sent_at TEXT DEFAULT(datetime('now')),success INTEGER DEFAULT 1,error TEXT);
+        CREATE TABLE IF NOT EXISTS bio_history(id INTEGER PRIMARY KEY AUTOINCREMENT,user_id TEXT NOT NULL,display_name TEXT NOT NULL,bio TEXT NOT NULL,recorded_at TEXT DEFAULT(datetime('now')));
+        CREATE INDEX IF NOT EXISTS idx_bio_history_user ON bio_history(user_id,recorded_at);`);
+}
+//# sourceMappingURL=schema.js.map

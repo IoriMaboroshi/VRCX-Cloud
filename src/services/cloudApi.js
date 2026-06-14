@@ -51,9 +51,9 @@ export async function cloudRequest(path, options = {}) {
     const url = `${serverUrl}${path}`;
 
     const headers = {
-        'Authorization': `Bearer ${apiKey}`,
+        Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json'
     };
 
     const fetchOptions = { method, headers };
@@ -74,7 +74,8 @@ export async function cloudRequest(path, options = {}) {
             let errorMsg;
             try {
                 const parsed = JSON.parse(errorBody);
-                errorMsg = parsed.message || parsed.error || `HTTP ${res.status}`;
+                errorMsg =
+                    parsed.message || parsed.error || `HTTP ${res.status}`;
             } catch {
                 errorMsg = `HTTP ${res.status}: ${errorBody.slice(0, 200)}`;
             }
@@ -100,7 +101,7 @@ export async function cloudRequest(path, options = {}) {
 export async function pushCookie(encryptedCookie) {
     return cloudRequest('/api/auth/push-cookie', {
         method: 'POST',
-        body: { encryptedCookie },
+        body: { encryptedCookie }
     });
 }
 
@@ -196,12 +197,14 @@ export async function getCloudHealth() {
     var url = serverUrl + '/health';
     console.log('[Cloud] getCloudHealth URL:', url);
     var controller = new AbortController();
-    var id = setTimeout(function() { controller.abort(); }, 8000);
+    var id = setTimeout(function () {
+        controller.abort();
+    }, 8000);
     try {
         var res = await fetch(url, { signal: controller.signal });
         console.log('[Cloud] Response:', res.status);
         return res.json();
-    } catch(e) {
+    } catch (e) {
         console.error('[Cloud] getCloudHealth error:', e.message || e);
         throw e;
     } finally {
@@ -217,7 +220,7 @@ export async function getCloudHealth() {
 export async function syncTrackedFriend(friend) {
     return cloudRequest('/api/push/tracked', {
         method: 'POST',
-        body: friend,
+        body: friend
     });
 }
 
@@ -235,7 +238,7 @@ export async function removeTrackedFriend(userId) {
 export async function addPushChannel(channel) {
     return cloudRequest('/api/push/channels', {
         method: 'POST',
-        body: channel,
+        body: channel
     });
 }
 
@@ -243,7 +246,7 @@ export async function addPushChannel(channel) {
 export async function updatePushChannel(id, channel) {
     return cloudRequest('/api/push/channels/' + id, {
         method: 'PUT',
-        body: channel,
+        body: channel
     });
 }
 

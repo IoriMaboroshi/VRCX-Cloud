@@ -23,7 +23,13 @@ class WebApiService {
         }
         const requestJson = JSON.stringify(options);
         var json = await WebApi.ExecuteJson(requestJson);
-        var data = JSON.parse(json);
+        try {
+            var data = JSON.parse(json || '{}');
+        } catch {
+            throw new Error(
+                `Invalid JSON response from WebApi: ${json?.substring(0, 100)}`
+            );
+        }
         if (data.status === -1) {
             throw new Error(data.message);
         }
