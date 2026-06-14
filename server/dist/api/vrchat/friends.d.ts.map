@@ -1,1 +1,0 @@
-{"version":3,"file":"friends.d.ts","sourceRoot":"","sources":["../../../src/api/vrchat/friends.ts"],"names":[],"mappings":"AAEA,qBAAa,aAAa;IAChB,gBAAgB;IAKtB,OAAO,CAAC,KAAK;IAUP,cAAc,CAAC,GAAG,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE,CAAC,EAAE,MAAM,CAAC,MAAM,EAAC,OAAO,CAAC;IACpE,YAAY,CAAC,GAAG,EAAE,MAAM;IACxB,aAAa,CAAC,GAAG,EAAE,MAAM;CAClC"}
