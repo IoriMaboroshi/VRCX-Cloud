@@ -1875,5 +1875,20 @@
                 "403_404_bailing_request": "Отмена запроса из-за недавних ошибок 404/403"
             }
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Облачная синхронизация",
+    "settings.integrations.cloud_settings.section_description": "Синхронизация данных друзей и активности с облачным сервером для круглосуточного отслеживания.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Включить облачную синхронизацию",
+    "settings.integrations.cloud_settings.server_url": "URL сервера",
+    "settings.integrations.cloud_settings.configure": "Настроить",
+    "settings.integrations.cloud_settings.push_settings": "Push-уведомления",
+    "settings.integrations.cloud_settings.description": "Подключитесь к VRCX Cloud серверу для синхронизации активности друзей и получения push-уведомлений.",
+    "settings.integrations.cloud_settings.api_key": "API-ключ",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Введите API-ключ облачного сервера",
+    "settings.integrations.cloud_settings.test": "Проверить соединение",
+    "settings.integrations.cloud_settings.testing": "Проверка...",
+    "settings.integrations.cloud_settings.save": "Сохранить",
+    "settings.integrations.cloud_settings.saved": "Настройки сохранены",
+    "settings.integrations.cloud_settings.connected": "Подключено к облачному серверу",
+    "settings.integrations.cloud_settings.connection_failed": "Ошибка подключения"
 }

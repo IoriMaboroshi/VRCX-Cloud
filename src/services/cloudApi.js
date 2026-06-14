@@ -42,7 +42,7 @@ export function getCloudServerUrl() {
  * @param {object} [options.body]
  * @returns {Promise<object>}
  */
-async function cloudRequest(path, options = {}) {
+export async function cloudRequest(path, options = {}) {
     if (!isCloudConfigured()) {
         throw new Error('Cloud server not configured');
     }

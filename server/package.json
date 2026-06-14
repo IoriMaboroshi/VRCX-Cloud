@@ -14,17 +14,13 @@
     },
     "dependencies": {
         "@fastify/cors": "^11.2.0",
-        "better-sqlite3": "^11.9.1",
         "fastify": "^5.6.2",
-        "node-cron": "^4.2.1",
         "nodemailer": "^6.10.1",
         "sql.js": "^1.14.1",
         "ws": "^8.20.0"
     },
     "devDependencies": {
-        "@types/better-sqlite3": "^7.6.13",
         "@types/node": "^25.6.0",
-        "@types/node-cron": "^3.0.11",
         "@types/nodemailer": "^6.4.23",
         "@types/sql.js": "^1.4.11",
         "@types/ws": "^8.18.1",

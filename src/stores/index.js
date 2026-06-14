@@ -172,6 +172,7 @@ export {
     useAuthStore,
     useAvatarStore,
     useAvatarProviderStore,
+    useCloudStore,
     useFavoriteStore,
     useFeedStore,
     useFriendStore,

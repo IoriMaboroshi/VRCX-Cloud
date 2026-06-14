@@ -1876,5 +1876,20 @@
                 "403_404_bailing_request": "Solicitud cancelada debido a un reciente 404/403"
             }
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Sincronización en la nube",
+    "settings.integrations.cloud_settings.section_description": "Sincroniza datos de amigos y actividad con el servidor en la nube para seguimiento 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Sincronización en la nube activada",
+    "settings.integrations.cloud_settings.server_url": "URL del servidor",
+    "settings.integrations.cloud_settings.configure": "Configurar",
+    "settings.integrations.cloud_settings.push_settings": "Notificaciones push",
+    "settings.integrations.cloud_settings.description": "Conéctate al servidor VRCX Cloud para sincronizar la actividad de amigos y recibir notificaciones push.",
+    "settings.integrations.cloud_settings.api_key": "Clave API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Ingresa la clave API del servidor en la nube",
+    "settings.integrations.cloud_settings.test": "Probar conexión",
+    "settings.integrations.cloud_settings.testing": "Probando...",
+    "settings.integrations.cloud_settings.save": "Guardar",
+    "settings.integrations.cloud_settings.saved": "Configuración guardada",
+    "settings.integrations.cloud_settings.connected": "Conectado al servidor en la nube",
+    "settings.integrations.cloud_settings.connection_failed": "Error de conexión"
 }

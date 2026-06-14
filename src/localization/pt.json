@@ -3011,5 +3011,20 @@
         "clocks_label": "Relógios",
         "clocks_none": "Nenhum",
         "timezone": "Fuso Horário"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Sincronização na Nuvem",
+    "settings.integrations.cloud_settings.section_description": "Sincronize dados de amigos e atividades com o servidor na nuvem para rastreamento 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Sincronização na Nuvem Ativada",
+    "settings.integrations.cloud_settings.server_url": "URL do Servidor",
+    "settings.integrations.cloud_settings.configure": "Configurar",
+    "settings.integrations.cloud_settings.push_settings": "Notificações Push",
+    "settings.integrations.cloud_settings.description": "Conecte-se ao servidor VRCX Cloud para sincronizar atividades de amigos e receber notificações push.",
+    "settings.integrations.cloud_settings.api_key": "Chave API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Insira a chave API do servidor na nuvem",
+    "settings.integrations.cloud_settings.test": "Testar Conexão",
+    "settings.integrations.cloud_settings.testing": "Testando...",
+    "settings.integrations.cloud_settings.save": "Salvar",
+    "settings.integrations.cloud_settings.saved": "Configurações salvas",
+    "settings.integrations.cloud_settings.connected": "Conectado ao servidor na nuvem",
+    "settings.integrations.cloud_settings.connection_failed": "Falha na conexão"
 }

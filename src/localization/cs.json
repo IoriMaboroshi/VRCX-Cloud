@@ -1754,5 +1754,20 @@
                 "403_404_bailing_request": "Bailing request due to recent 404/403"
             }
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Cloud synchronizace",
+    "settings.integrations.cloud_settings.section_description": "Synchronizujte data přátel a aktivitu s cloudovým serverem pro sledování 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Cloud synchronizace zapnuta",
+    "settings.integrations.cloud_settings.server_url": "URL serveru",
+    "settings.integrations.cloud_settings.configure": "Nastavit",
+    "settings.integrations.cloud_settings.push_settings": "Push notifikace",
+    "settings.integrations.cloud_settings.description": "Připojte se k VRCX Cloud serveru pro synchronizaci aktivity přátel a příjem push notifikací.",
+    "settings.integrations.cloud_settings.api_key": "API klíč",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Zadejte API klíč cloudového serveru",
+    "settings.integrations.cloud_settings.test": "Otestovat připojení",
+    "settings.integrations.cloud_settings.testing": "Testování...",
+    "settings.integrations.cloud_settings.save": "Uložit",
+    "settings.integrations.cloud_settings.saved": "Nastavení uloženo",
+    "settings.integrations.cloud_settings.connected": "Připojeno k cloudovému serveru",
+    "settings.integrations.cloud_settings.connection_failed": "Připojení selhalo"
 }

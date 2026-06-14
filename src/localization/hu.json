@@ -1548,5 +1548,20 @@
             "cpu": "CPU:",
             "online": "Online:"
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Cloud szinkronizálás",
+    "settings.integrations.cloud_settings.section_description": "Barátok adatainak és tevékenységének szinkronizálása felhőszerverrel a 24/7 követés érdekében.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Cloud szinkronizálás engedélyezve",
+    "settings.integrations.cloud_settings.server_url": "Szerver URL",
+    "settings.integrations.cloud_settings.configure": "Beállítás",
+    "settings.integrations.cloud_settings.push_settings": "Push értesítések",
+    "settings.integrations.cloud_settings.description": "Csatlakozás a VRCX Cloud szerverhez a barátok tevékenységének szinkronizálásához és push értesítések fogadásához.",
+    "settings.integrations.cloud_settings.api_key": "API kulcs",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Adja meg a felhőszerver API kulcsát",
+    "settings.integrations.cloud_settings.test": "Kapcsolat tesztelése",
+    "settings.integrations.cloud_settings.testing": "Tesztelés...",
+    "settings.integrations.cloud_settings.save": "Mentés",
+    "settings.integrations.cloud_settings.saved": "Beállítások elmentve",
+    "settings.integrations.cloud_settings.connected": "Csatlakozva a felhőszerverhez",
+    "settings.integrations.cloud_settings.connection_failed": "Kapcsolat sikertelen"
 }

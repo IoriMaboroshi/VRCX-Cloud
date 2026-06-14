@@ -2189,5 +2189,20 @@
                 "unavailable": "Usługa może być niedostępna z powodu problemów wewnętrznych VRChat"
             }
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Synchronizacja w chmurze",
+    "settings.integrations.cloud_settings.section_description": "Synchronizuj dane znajomych i aktywność z serwerem w chmurze, aby śledzić je 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Włącz synchronizację w chmurze",
+    "settings.integrations.cloud_settings.server_url": "Adres URL serwera",
+    "settings.integrations.cloud_settings.configure": "Konfiguruj",
+    "settings.integrations.cloud_settings.push_settings": "Powiadomienia push",
+    "settings.integrations.cloud_settings.description": "Połącz się z serwerem VRCX Cloud, aby synchronizować aktywność znajomych i otrzymywać powiadomienia push.",
+    "settings.integrations.cloud_settings.api_key": "Klucz API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Wprowadź klucz API serwera w chmurze",
+    "settings.integrations.cloud_settings.test": "Testuj połączenie",
+    "settings.integrations.cloud_settings.testing": "Testowanie...",
+    "settings.integrations.cloud_settings.save": "Zapisz",
+    "settings.integrations.cloud_settings.saved": "Ustawienia zapisane",
+    "settings.integrations.cloud_settings.connected": "Połączono z serwerem w chmurze",
+    "settings.integrations.cloud_settings.connection_failed": "Połączenie nie powiodło się"
 }

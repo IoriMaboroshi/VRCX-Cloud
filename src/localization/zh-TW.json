@@ -3126,5 +3126,20 @@
         "clocks_label": "時鐘",
         "clocks_none": "無",
         "timezone": "時區"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX 雲端同步",
+    "settings.integrations.cloud_settings.section_description": "將好友資料和動態同步到雲端伺服器，實現 24/7 全天候追蹤。",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "啟用雲端同步",
+    "settings.integrations.cloud_settings.server_url": "伺服器位址",
+    "settings.integrations.cloud_settings.configure": "設定",
+    "settings.integrations.cloud_settings.push_settings": "推播通知",
+    "settings.integrations.cloud_settings.description": "連線到 VRCX 雲端伺服器以同步好友動態並接收推播通知。",
+    "settings.integrations.cloud_settings.api_key": "API 金鑰",
+    "settings.integrations.cloud_settings.api_key_placeholder": "輸入雲端伺服器 API 金鑰",
+    "settings.integrations.cloud_settings.test": "測試連線",
+    "settings.integrations.cloud_settings.testing": "測試中...",
+    "settings.integrations.cloud_settings.save": "儲存",
+    "settings.integrations.cloud_settings.saved": "設定已儲存",
+    "settings.integrations.cloud_settings.connected": "已連線到雲端伺服器",
+    "settings.integrations.cloud_settings.connection_failed": "連線失敗"
 }

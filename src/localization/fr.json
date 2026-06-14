@@ -2059,5 +2059,20 @@
         "back_to_top": "Retour en haut",
         "toggle_password": "Afficher le mto de passe",
         "clear_input": "Effacer la saisie"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Synchronisation Cloud",
+    "settings.integrations.cloud_settings.section_description": "Synchronisez les données des amis et l'activité vers un serveur cloud pour un suivi 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Synchronisation Cloud activée",
+    "settings.integrations.cloud_settings.server_url": "URL du serveur",
+    "settings.integrations.cloud_settings.configure": "Configurer",
+    "settings.integrations.cloud_settings.push_settings": "Notifications push",
+    "settings.integrations.cloud_settings.description": "Connectez-vous au serveur VRCX Cloud pour synchroniser l'activité des amis et recevoir des notifications push.",
+    "settings.integrations.cloud_settings.api_key": "Clé API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Entrez la clé API du serveur cloud",
+    "settings.integrations.cloud_settings.test": "Tester la connexion",
+    "settings.integrations.cloud_settings.testing": "Test en cours...",
+    "settings.integrations.cloud_settings.save": "Enregistrer",
+    "settings.integrations.cloud_settings.saved": "Paramètres enregistrés",
+    "settings.integrations.cloud_settings.connected": "Connecté au serveur cloud",
+    "settings.integrations.cloud_settings.connection_failed": "Échec de la connexion"
 }

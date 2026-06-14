@@ -1559,5 +1559,20 @@
             "cpu": "CPU:",
             "online": "온라인:"
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX 클라우드 동기화",
+    "settings.integrations.cloud_settings.section_description": "친구 데이터와 활동을 클라우드 서버에 동기화하여 24시간 추적합니다.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "클라우드 동기화 활성화",
+    "settings.integrations.cloud_settings.server_url": "서버 URL",
+    "settings.integrations.cloud_settings.configure": "설정",
+    "settings.integrations.cloud_settings.push_settings": "푸시 알림",
+    "settings.integrations.cloud_settings.description": "VRCX 클라우드 서버에 연결하여 친구 활동을 동기화하고 푸시 알림을 받습니다.",
+    "settings.integrations.cloud_settings.api_key": "API 키",
+    "settings.integrations.cloud_settings.api_key_placeholder": "클라우드 서버 API 키 입력",
+    "settings.integrations.cloud_settings.test": "연결 테스트",
+    "settings.integrations.cloud_settings.testing": "테스트 중...",
+    "settings.integrations.cloud_settings.save": "저장",
+    "settings.integrations.cloud_settings.saved": "설정이 저장되었습니다",
+    "settings.integrations.cloud_settings.connected": "클라우드 서버에 연결되었습니다",
+    "settings.integrations.cloud_settings.connection_failed": "연결 실패"
 }

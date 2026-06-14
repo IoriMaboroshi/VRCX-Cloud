@@ -3,10 +3,10 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import { config } from '../config.js';
 let SQL: any = null; let _db: any = null;
-class CS { stmt: any; constructor(d: SDb, s: string) { this.stmt = d.prepare(s); }
+class CS { stmt: any; db: SDb; constructor(d: SDb, s: string) { this.db = d; this.stmt = d.prepare(s); }
   all(...p: any[]) { const r: any[] = []; if(p.length)this.stmt.bind(p as any); while(this.stmt.step())r.push(this.stmt.getAsObject()); this.stmt.free(); return r; }
   get(...p: any[]) { if(p.length)this.stmt.bind(p as any); const ok = this.stmt.step(); const r = ok ? this.stmt.getAsObject() : undefined; this.stmt.free(); return r; }
-  run(...p: any[]) { if(p.length)this.stmt.bind(p as any); this.stmt.step(); this.stmt.free(); return {changes:1, lastInsertRowid:0}; } }
+  run(...p: any[]) { if(p.length)this.stmt.bind(p as any); this.stmt.step(); this.stmt.free(); const changes = (this.db as any).getRowsModified(); const lastId = this.db.exec('SELECT last_insert_rowid()')?.[0]?.values?.[0]?.[0] ?? 0; return {changes, lastInsertRowid:lastId}; } }
 class CD { db: SDb; fp: string; constructor(d: SDb, f: string) { this.db = d; this.fp = f; }
   prepare(s: string): CS { return new CS(this.db, s); }
   exec(s: string): void { this.db.run(s); }

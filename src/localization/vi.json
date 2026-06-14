@@ -1548,5 +1548,20 @@
             "cpu": "CPU:",
             "online": "Online:"
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX Đồng bộ đám mây",
+    "settings.integrations.cloud_settings.section_description": "Đồng bộ dữ liệu bạn bè và hoạt động lên máy chủ đám mây để theo dõi 24/7.",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "Bật đồng bộ đám mây",
+    "settings.integrations.cloud_settings.server_url": "URL máy chủ",
+    "settings.integrations.cloud_settings.configure": "Cấu hình",
+    "settings.integrations.cloud_settings.push_settings": "Thông báo đẩy",
+    "settings.integrations.cloud_settings.description": "Kết nối đến máy chủ VRCX Cloud để đồng bộ hoạt động bạn bè và nhận thông báo đẩy.",
+    "settings.integrations.cloud_settings.api_key": "Khóa API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "Nhập khóa API máy chủ đám mây",
+    "settings.integrations.cloud_settings.test": "Kiểm tra kết nối",
+    "settings.integrations.cloud_settings.testing": "Đang kiểm tra...",
+    "settings.integrations.cloud_settings.save": "Lưu",
+    "settings.integrations.cloud_settings.saved": "Đã lưu cài đặt",
+    "settings.integrations.cloud_settings.connected": "Đã kết nối đến máy chủ đám mây",
+    "settings.integrations.cloud_settings.connection_failed": "Kết nối thất bại"
 }

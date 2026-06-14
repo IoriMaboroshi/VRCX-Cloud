@@ -3117,5 +3117,20 @@
         "clocks_label": "時計",
         "clocks_none": "なし",
         "timezone": "タイムゾーン"
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX クラウド同期",
+    "settings.integrations.cloud_settings.section_description": "フレンドデータとアクティビティをクラウドサーバーに同期し、24時間365日追跡します。",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "クラウド同期を有効にする",
+    "settings.integrations.cloud_settings.server_url": "サーバーURL",
+    "settings.integrations.cloud_settings.configure": "設定",
+    "settings.integrations.cloud_settings.push_settings": "プッシュ通知",
+    "settings.integrations.cloud_settings.description": "VRCXクラウドサーバーに接続してフレンドアクティビティを同期し、プッシュ通知を受信します。",
+    "settings.integrations.cloud_settings.api_key": "APIキー",
+    "settings.integrations.cloud_settings.api_key_placeholder": "クラウドサーバーのAPIキーを入力",
+    "settings.integrations.cloud_settings.test": "接続テスト",
+    "settings.integrations.cloud_settings.testing": "テスト中...",
+    "settings.integrations.cloud_settings.save": "保存",
+    "settings.integrations.cloud_settings.saved": "設定を保存しました",
+    "settings.integrations.cloud_settings.connected": "クラウドサーバーに接続しました",
+    "settings.integrations.cloud_settings.connection_failed": "接続に失敗しました"
 }

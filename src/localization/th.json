@@ -1928,5 +1928,20 @@
                 "403_404_bailing_request": "ยกเลิกคำร้องขอเนื่องจากพบข้อผิดพลาด 404/403 ล่าสุด"
             }
         }
-    }
+    },
+    "settings.integrations.cloud_settings.header": "VRCX ซิงค์คลาวด์",
+    "settings.integrations.cloud_settings.section_description": "ซิงค์ข้อมูลเพื่อนและกิจกรรมไปยังเซิร์ฟเวอร์คลาวด์เพื่อติดตามตลอด 24 ชั่วโมง",
+    "settings.integrations.cloud_settings.cloud_sync_enable": "เปิดใช้งานซิงค์คลาวด์",
+    "settings.integrations.cloud_settings.server_url": "URL เซิร์ฟเวอร์",
+    "settings.integrations.cloud_settings.configure": "กำหนดค่า",
+    "settings.integrations.cloud_settings.push_settings": "การแจ้งเตือนแบบพุช",
+    "settings.integrations.cloud_settings.description": "เชื่อมต่อไปยังเซิร์ฟเวอร์ VRCX Cloud เพื่อซิงค์กิจกรรมเพื่อนและรับการแจ้งเตือนแบบพุช",
+    "settings.integrations.cloud_settings.api_key": "คีย์ API",
+    "settings.integrations.cloud_settings.api_key_placeholder": "ป้อนคีย์ API ของเซิร์ฟเวอร์คลาวด์",
+    "settings.integrations.cloud_settings.test": "ทดสอบการเชื่อมต่อ",
+    "settings.integrations.cloud_settings.testing": "กำลังทดสอบ...",
+    "settings.integrations.cloud_settings.save": "บันทึก",
+    "settings.integrations.cloud_settings.saved": "บันทึกการตั้งค่าแล้ว",
+    "settings.integrations.cloud_settings.connected": "เชื่อมต่อกับเซิร์ฟเวอร์คลาวด์แล้ว",
+    "settings.integrations.cloud_settings.connection_failed": "การเชื่อมต่อล้มเหลว"
 }

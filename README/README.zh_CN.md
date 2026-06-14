@@ -29,7 +29,7 @@ VRCX-Cloud 是 [VRCX](https://github.com/vrcx-team/VRCX) 的 fork 版本，新�
 - :bar_chart: **状态分布** — 可视化好友状态灯色分布（在线/可加入/请询问/忙碌/离线），一目了然。
 - :bust_in_silhouette: **自我记录** — 记录自己的位置与状态变化历史，生成个人活动时间线。
 - :stopwatch: **持久化计时** — 好友"所在实例时长"不会因重启归零，从云端数据自动恢复。
-- :busts_in_silhouette: **多账号隔离** — 使用独立的 `app.vrcx-dev` 数据目录，不与正式版 VRCX 冲突。
+- :busts_in_silhouette: **多账号隔离** — 使用独立的 `app.vrcx-cloud` 数据目录，不与正式版 VRCX 冲突。
 - :globe_with_meridians: **跨平台** — 云端服务器支持所有 Node.js 24+ 环境（VPS、家庭服务器、树莓派等）。桌面端兼容 VRCX 所有平台（Windows、Linux、macOS）。
 
 </div>

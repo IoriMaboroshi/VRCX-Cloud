@@ -29,7 +29,7 @@ VRCX-Cloud is a fork of [VRCX](https://github.com/vrcx-team/VRCX) that adds a 24
 - :bar_chart: **Status Distribution** — Visualize friend status color distribution (online/join-me/ask-me/busy/offline) in a clean chart.
 - :bust_in_silhouette: **Self-Data Tracking** — Records your own location and status changes over time, giving you a personal activity timeline.
 - :stopwatch: **Persistent Timer** — Friend "time in instance" survives app restarts by restoring from cloud data.
-- :busts_in_silhouette: **Multi-Account Isolation** — Uses a separate `app.vrcx-dev` data directory so cloud-sync settings never conflict with your main VRCX installation.
+- :busts_in_silhouette: **Multi-Account Isolation** — Uses a separate `app.vrcx-cloud` data directory so cloud-sync settings never conflict with your main VRCX installation.
 - :globe_with_meridians: **Cross-Platform** — Cloud server runs on any Node.js 24+ environment (VPS, home server, Raspberry Pi). Desktop client runs wherever VRCX runs (Windows, Linux, macOS).
 
 </div>
