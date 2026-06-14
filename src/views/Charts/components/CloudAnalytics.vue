@@ -32,13 +32,12 @@
         <div class="border rounded-lg p-4">
             <h3 class="text-sm font-medium mb-3">Recent Bio Changes</h3>
             <div v-if="bioList.length" class="space-y-3">
-                <div v-for="item in bioList" :key="item.name" class="border rounded-md p-3">
+                <div v-for="item in bioList" :key="item.user_id + item.recorded_at" class="border rounded-md p-3">
                     <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium">{{ item.name }}</span>
-                        <span class="text-xs text-muted-foreground">{{ item.time }}</span>
+                        <span class="text-sm font-medium">{{ item.display_name }}</span>
+                        <span class="text-xs text-muted-foreground">{{ formatTime(item.recorded_at) }}</span>
                     </div>
-                    <div
-                        class="text-xs whitespace-pre-wrap leading-relaxed max-h-24 overflow-y-auto bg-muted/50 rounded p-2">
+                    <div class="text-xs whitespace-pre-wrap leading-relaxed max-h-24 overflow-y-auto bg-muted/50 rounded p-2">
                         <template v-if="item.bio">{{ item.bio }}</template>
                         <template v-else><span class="text-muted-foreground italic">(empty)</span></template>
                     </div>
@@ -122,7 +121,7 @@
     async function refresh() {
         if (!cloudStore.shouldUseCloud()) return;
         try {
-            statusDist.value = await cloudApi.cloudRequest('/api/analytics/status-distribution');
+            statusDist.value = await cloudApi.getStatusDistribution();
         } catch (e) {}
         try {
             const res = await cloudApi.getCloudFriends();
@@ -130,10 +129,28 @@
             onlineList.value = f
                 .filter((x) => x.location !== 'offline' && x.location !== 'private')
                 .map((x) => ({ id: x.user_id, name: x.display_name, status: x.status, world: x.world_id }));
-            bioList.value = f
+            // Fetch bio history for friends with recent changes
+            const recentBioFriends = f
                 .filter((x) => x.bio && x.bio.length > 5)
-                .slice(0, 8)
-                .map((x) => ({ name: x.display_name, bio: x.bio, time: formatTime(x.updated_at) }));
+                .slice(0, 5);
+            const bioHistoryPromises = recentBioFriends.map(async (x) => {
+                try {
+                    const history = await cloudApi.getBioHistory(x.user_id);
+                    return (history.history || []).map((h) => ({
+                        user_id: x.user_id,
+                        display_name: x.display_name,
+                        bio: h.bio,
+                        recorded_at: h.recorded_at
+                    }));
+                } catch {
+                    return [];
+                }
+            });
+            const bioHistoryResults = await Promise.all(bioHistoryPromises);
+            bioList.value = bioHistoryResults
+                .flat()
+                .sort((a, b) => new Date(b.recorded_at).getTime() - new Date(a.recorded_at).getTime())
+                .slice(0, 10);
         } catch (e) {}
     }
 

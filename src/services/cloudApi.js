@@ -264,3 +264,17 @@ export async function getPushChannels() {
 export async function getPushEvents(limit) {
     return cloudRequest('/api/push/events?limit=' + (limit || 50));
 }
+
+// ============================================================
+// Analytics
+// ============================================================
+
+/** Get bio change history for a user */
+export async function getBioHistory(userId) {
+    return cloudRequest('/api/analytics/bio/' + userId);
+}
+
+/** Get status distribution */
+export async function getStatusDistribution() {
+    return cloudRequest('/api/analytics/status-distribution');
+}
