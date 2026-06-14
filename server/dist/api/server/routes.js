@@ -1,0 +1,69 @@
+import { getDb } from '../../db/connection.js';
+import { apiKeyAuth } from './middleware.js';
+import { pushCookie, getCurrentUser } from '../vrchat/auth.js';
+import { startPolling } from '../../scheduler/index.js';
+import { logger } from '../../utils/logger.js';
+export async function apiRoutes(fastify) {
+    fastify.addHook('preHandler', async (r, reply) => { try {
+        const u = r.url;
+        if (u === '/api/health' || u === '/health')
+            return;
+        await apiKeyAuth(r, reply);
+    }
+    catch (e) {
+        reply.code(401).send({ error: 'Auth failed' });
+    } });
+    fastify.post('/auth/push-cookie', async (r, reply) => {
+        const b = r.body;
+        if (!b?.encryptedCookie)
+            return reply.code(400).send({ error: 'Missing encryptedCookie' });
+        try {
+            pushCookie(b.encryptedCookie);
+            startPolling().catch(e => logger.error('Polling start: ' + e));
+            return { ok: true };
+        }
+        catch (e) {
+            return reply.code(401).send({ error: e.message });
+        }
+    });
+    fastify.get('/auth/status', async () => { try {
+        const u = await getCurrentUser();
+        return { authenticated: true, user: { id: u.id, displayName: u.displayName } };
+    }
+    catch {
+        return { authenticated: false, message: 'No stored cookie' };
+    } });
+    fastify.get('/friends', async (r) => { const db = getDb(); const q = r.query; const fs = q.since ? db.prepare('SELECT * FROM friends WHERE updated_at > ? ORDER BY updated_at').all(q.since) : db.prepare('SELECT * FROM friends WHERE is_friend=1 ORDER BY CASE status WHEN \'active\' THEN 0 WHEN \'join me\' THEN 1 WHEN \'online\' THEN 2 ELSE 5 END, display_name COLLATE NOCASE').all(); return { friends: fs }; });
+    fastify.get('/friends/:id/history', async (r) => { const db = getDb(); const { id } = r.params; return { userId: id, history: db.prepare('SELECT * FROM location_history WHERE user_id=? ORDER BY timestamp DESC LIMIT 500').all(id) }; });
+    fastify.get('/friends/log', async () => { return { events: getDb().prepare('SELECT * FROM friend_events ORDER BY timestamp DESC LIMIT 500').all() }; });
+    fastify.get('/friends/locations', async () => { const db = getDb(); const l = db.prepare("SELECT user_id,display_name,location,world_id,instance_id,status,updated_at FROM friends WHERE is_friend=1 AND location!='offline' AND location!='private' ORDER BY updated_at DESC").all(); return { locations: l }; });
+    fastify.get('/notifications', async () => { const db = getDb(); const ns = db.prepare('SELECT * FROM notifications ORDER BY created_at DESC LIMIT 200').all(); const uc = db.prepare('SELECT count(*) as c FROM notifications WHERE seen=0').get(); return { notifications: ns, unreadCount: uc?.c || 0 }; });
+    fastify.get('/worlds', async () => { return { worlds: getDb().prepare('SELECT * FROM worlds ORDER BY updated_at DESC').all() }; });
+    fastify.get('/avatars', async () => { return { avatars: getDb().prepare('SELECT * FROM avatars ORDER BY updated_at DESC').all() }; });
+    // Analytics
+    fastify.get('/analytics/bio/:userId', async (r) => { const { userId } = r.params; return { userId, history: getDb().prepare('SELECT * FROM bio_history WHERE user_id=? ORDER BY recorded_at DESC LIMIT 50').all(userId) }; });
+    fastify.get('/analytics/status-distribution', async () => { const rows = getDb().prepare('SELECT status,count(*) as cnt FROM friends GROUP BY status').all(); const d = {}; for (const r of rows)
+        d[r.status] = r.cnt; return { distribution: d, total: Object.values(d).reduce((a, b) => a + b, 0) }; });
+    // Push management
+    fastify.get('/push/tracked', async () => { return { tracked: getDb().prepare('SELECT * FROM tracked_friends').all() }; });
+    fastify.post('/push/tracked', async (r) => { const b = r.body; const db = getDb(); db.prepare('INSERT OR REPLACE INTO tracked_friends(user_id,display_name,notify_online,notify_offline,notify_location,notify_status) VALUES(?,?,?,?,?,?)').run(b.userId, b.displayName, b.notifyOnline ? 1 : 0, b.notifyOffline ? 1 : 0, b.notifyLocation ? 1 : 0, b.notifyStatus ? 1 : 0); return { ok: true }; });
+    fastify.delete('/push/tracked/:userId', async (r) => { const { userId } = r.params; getDb().prepare('DELETE FROM tracked_friends WHERE user_id=?').run(userId); return { ok: true }; });
+    fastify.get('/push/channels', async () => { return { channels: getDb().prepare('SELECT * FROM push_channels').all() }; });
+    fastify.post('/push/channels', async (r) => { const b = r.body; const db = getDb(); db.prepare('INSERT INTO push_channels(channel_type,label,config) VALUES(?,?,?)').run(b.channelType, b.label, JSON.stringify(b.config)); return { ok: true }; });
+    fastify.put('/push/channels/:id', async (r) => { const { id } = r.params; const b = r.body; const db = getDb(); const sets = []; const vals = []; if (b.channelType) {
+        sets.push('channel_type=?');
+        vals.push(b.channelType);
+    } if (b.label !== undefined) {
+        sets.push('label=?');
+        vals.push(b.label);
+    } if (b.config) {
+        sets.push('config=?');
+        vals.push(JSON.stringify(b.config));
+    } if (sets.length) {
+        sets.push('updated_at=datetime(\'now\')');
+        db.prepare('UPDATE push_channels SET ' + sets.join(',') + ' WHERE id=?').run(...vals, parseInt(id));
+    } return { ok: true }; });
+    fastify.delete('/push/channels/:id', async (r) => { const { id } = r.params; getDb().prepare('DELETE FROM push_channels WHERE id=?').run(parseInt(id)); return { ok: true }; });
+    fastify.get('/push/events', async (r) => { const q = r.query; const lim = Math.min(Math.max(parseInt(q.limit || '50') || 50, 1), 500); return { events: getDb().prepare('SELECT * FROM push_events ORDER BY sent_at DESC LIMIT ?').all(lim) }; });
+}
+//# sourceMappingURL=routes.js.map

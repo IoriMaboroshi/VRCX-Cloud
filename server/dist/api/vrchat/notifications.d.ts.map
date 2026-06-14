@@ -1,0 +1,1 @@
+{"version":3,"file":"notifications.d.ts","sourceRoot":"","sources":["../../../src/api/vrchat/notifications.ts"],"names":[],"mappings":"AACA,qBAAa,mBAAmB;IACtB,kBAAkB;IACxB,OAAO,CAAC,KAAK;IACP,0BAA0B,CAAC,CAAC,EAAC,GAAG;IAChC,4BAA4B,CAAC,CAAC,EAAC,GAAG;IAClC,wBAAwB,CAAC,GAAG,EAAC,MAAM,EAAE;CAC9C"}
